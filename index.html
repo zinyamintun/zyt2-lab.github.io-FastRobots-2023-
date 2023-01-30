@@ -179,18 +179,48 @@
                                     </div>
                                     <!-- Portfolio Modal - Image<img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 1"/>-->
                                     <!-- Portfolio Modal - Text-->
-                                    
+                                    <!-- Lab Description-->
                                     <p align=left> <strong>Lab Description: </strong> <br>
                                         The purpose of this lab is to set up and become familiar with the Arduino IDE and the Artemis board. 
                                        After downloading the Arduino IDE and Sparkfun Appollo 3 support software, we used the various provided example codes to help us become 
                                        comfortable with programming the board by completing the following tasks.</p>
                                     <hr>
+                                    <!-- Part List-->
                                     <p align=left> <strong> Parts Requires: </strong> 
                                     <ul style="text-align:left;">
                                     <li> 1 x SparkFun Red Board Artemis Nano</li>
                                     <li> 1 x USB C to C cable</li>
                                     </ul>
                                     </p>
+                                    <hr>
+                                    <!-- Part 1-->
+                                     <p align=left> <strong>Part 1: Blink it Up! </strong> <br>
+                                       The first task was to run the Blink code under Basics Example to ensure the built-in LEDs were working. 
+                                         The example code uses digitalWrite and delay(1000) to toggle the LED on the board. As shown in the video, 
+                                         the blue LED blinked in a consistent time interval every second when the code was run. </p>
+                                     <p align=left> <strong>Part 2: Serial </strong> <br>
+                                       The second task was to run the Example04_Serial under the Artemis Example to ensure that the serial port was 
+                                         working properly. The example code uses Serial.read to read the Serial Input and uses Serial.write to echo 
+                                         it back to the Serial Output. In the video, I demonstrated that the Arduino’s serial port is functioning properly by 
+                                         showing that the code echoed back when I typed “hello” to the Serial Monitor. </p>
+                                     <p align=left> <strong>Part 3: analog_Read Temperature </strong> <br>
+                                       The third task was to run the Example02_analongRead under Artemis Example to test that the on-chip ADC on the 
+                                         Artemis board that can be used to measure analog voltage was working, specifically the temperature sensor. 
+                                         Besides the internal die temperature, the code also printed external (counts) which read the analog voltage 
+                                         on the selected analog pin, VCC voltage, and VSS voltage. At the beginning of the video, we can see that the initial 
+                                         temp (counts) was around the 33,500 range when it was held. When the microcontroller on the Artemis board is pressed, 
+                                         the temp (counts) increase gradually to the 33,700 range. This verified that the sensor was functioning properly because 
+                                         the increase in temp (count) corresponds to the increase in the internal die temperature on the sensor as the board was 
+                                         heated by my hand. </p>
+                                     <p align=left> <strong>Part 4: PDM [Pulse Density Modulation] </strong> <br>
+                                       The fourth task was to run the Example1_MicrophoneOutput under PDM Example to test that the MEMS microphone on 
+                                         the Artemis board is working. The PDM Microphone Output example configures the PDM microphone based on the
+                                         microcontroller and PDM clock speed to determine the sampling frequency. The code then performs an FFT to 
+                                         determine the loudest frequency and prints it to the Serial Monitor. As shown in the video, the initial frequency
+                                         on the serial monitor was about 114 Hz when only ambient noise was present. In order to test the microphone, I ran 
+                                         an online tone generator to produce a 440 Hz frequency on my phone. As we can see in the video, the new loudest 
+                                         frequency detected by the microphone was 434 Hz which is about 98.6% accuracy. </p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
