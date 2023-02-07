@@ -251,7 +251,7 @@
                                     <!-- Portfolio Modal - Image<img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="LAB 2"/>-->
                                     <!-- Portfolio Modal - Text-->
                                      <!-- Lab Description-->
-                                    <u><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
                                     <p class="text-left text-secondary mb-0;">
                                         The purpose of this lab is to become familiar with the Bluetooth Module on the Artemis board. Through the Bluetooth stack, communication 
                                         between the computer and Artemis board  was established, with the computer being the client and the Artemis board being the server. <br><br>
@@ -266,15 +266,15 @@
                                     </ul>
                                     </p>
                                     <hr>-->
-                                    <h3 class="text-left text-secondary mb-0;"> Prelab:</h3>
+                                    <u class= "text-secondary" <h3 class="text-left text-secondary mb-0;"> Prelab:</h3></u><br>
                                          <h6 class="text-left text-secondary mb-0;"> Computer Setup:</h6>
                                           <p class="text-left text-secondary mb-0;"> 
                                              After installing the required softwares (Python 3, pip and Virtual Environment), I created a new virtual environment named FastRobots_ble. To use 
                                              the Python scripts (or Jupyter notebook), I activated the FastRobots_ble virtual environment and downloaded the required packages using the following 
-                                             commands. <br>
-                                              <span style= " text-secondary "> >> source FastRobots_ble/bin/activate<br>
-                                                  >> pip install numpy pyyaml colorama nest_asyncio bleak jupyterlab<br>
-                                              </span>
+                                             commands. <br><br>
+                                              <em><strong> >> source FastRobots_ble/bin/activate<br>
+                                                  >> pip install numpy pyyaml colorama nest_asyncio bleak jupyterlab</strong><em>
+                                              
                                     </p>
                                     <h6 class="text-left text-secondary mb-0;"> Codebase:</h6>
                                           <p class="text-left text-secondary mb-0;"> 
@@ -282,13 +282,12 @@
                                              </p>
                                  <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
                                         Install the ArduinoBLE from the Library Manager and upload the ble_arduino.ino into the board from the directory 
-                                        ble_arduino in the codebase. This printed the MAC address in Serial Monitor.<br>
+                                        ble_arduino in the codebase. This printed the MAC address in Serial Monitor.<br><br>
                                      <em><strong>>> Advertising BLE with MAC: c0:83:9:69:4:3c</strong></em>
-                                    <!--<img src="Lab 2/Mac_address.png" alt="Activation" style="width:60%">-->
                                     </p>
                                 <hr>
                                     
-                                  <h3 class="text-left text-secondary mb-0;">Task: </h3>  
+                                  <u class= "text-secondary" <h3 class="text-left text-secondary mb-0;">Task: </h3>  </u><br>
                                      <h6 class="text-left text-secondary mb-0;">Configurations: </h6>
                                      <p class="text-left text-secondary mb-0;"> 
                                         Update the configuration file <connection.yaml> with the displayed MAC address from Arduino Setup. Change the 
@@ -299,7 +298,7 @@
                                       <p class="text-left text-secondary mb-0;"> 
                                          demo.ipynb is the main file for Jupyter Notebook to run commands and set up the bluetooth connection 
                                          between the computer and the board. <br><br>
-                                          <iframe width=70% src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
+                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
                                         </p>
                                     
                                         <h6 class="text-left text-secondary mb-0;">Send Echo Command: </h6>
@@ -307,14 +306,14 @@
                                         The first task is to send an ECHO command with a string value as an argument from the computer to the Artemis board 
                                         and receive the augmented string back to the computer. For example, when I send <msg>, the computer receives “Robot says-> <msg> :)”.
                                         The implementation of this task uses the EString class to manipulate the string, specifically append( ) function. <br><br>
-                                        <iframe width=70% src="https://www.youtube.com/embed/QIh6hJBHRto?controls=1"> </iframe>  
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/QIh6hJBHRto?controls=1"> </iframe>  
                                         </p>
                                           
                                        <h6 class="text-left text-secondary mb-0;">Get Time Command: </h6>
                                         <p class="text-left text-secondary mb-0;"> 
                                        The second task is to send  a GET_TIME_MILLIS command to the Artemis board and receive a string characteristic such as “T:123456”. 
                                        In addition to the functions from the Estring class, I used millis() to get the time.  <br><br>
-                                        <iframe width=70% src="https://www.youtube.com/embed/nLswzmc5UQc?controls=1"> </iframe>  
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/nLswzmc5UQc?controls=1"> </iframe>  
                                         </p>
                                             
                                             
@@ -326,7 +325,7 @@
                                         When the GET_TIME_MILLIS command was sent, start_notify(uuid, notification handler) triggered the notification_handler 
                                         function. This function then received the string value (BLEStringCharacteristic) from the Arduino board and stored it in 
                                            the global variable timelist.<br><br>
-                                            <iframe width=70% src="https://www.youtube.com/embed/lVTe-W2yW9k?controls=1"> </iframe>  
+                                            <iframe width="560" height="345" src="https://www.youtube.com/embed/lVTe-W2yW9k?controls=1"> </iframe>  
                                         </p>
                                             
                                             <h6 class="text-left text-secondary mb-0;">Get Temperature Command:  </h6>
@@ -336,7 +335,7 @@
                                             and for-loop with one second delay <delay(1000)> to store the time <millis()> and temperature readings < getTempDegC()>. The code was 
                                             then processed by the notification_handler_temp in the python code and stored it in the global variable temp_list. 
                                        <br><br>
-                                             <iframe width=70% src="https://www.youtube.com/embed/QRJBMSH7AYw?controls=1"> </iframe>  <br>
+                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/QRJBMSH7AYw?controls=1"> </iframe>  <br>
                                        
                                             
                                             The fifth task is to send a GET_TEMP_5s_RAPID command which sends an array of five seconds worth of rapidly sampled temperature data.
@@ -346,7 +345,7 @@
                                             to the computer until all the data is sent.  The code was then processed by the notification_handler_temp in the python code and stored 
                                             it in the global variable temprapid_list. As a result, GET_TEMP_5s_RAPID was able to rapidly collect and send 5 seconds worth of 250 
                                             readings.<br><br>
-                                             <iframe width=70% src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  
+                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  
                                             
                                         </p>
                                     <hr>
