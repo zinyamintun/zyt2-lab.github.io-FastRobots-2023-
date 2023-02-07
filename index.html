@@ -251,7 +251,7 @@
                                     <!-- Portfolio Modal - Image<img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="LAB 2"/>-->
                                     <!-- Portfolio Modal - Text-->
                                      <!-- Lab Description-->
-                                    <h1 class="text-left text-secondary mb-0;">Lab Description:</h1>
+                                    <h3 class="text-left text-secondary mb-0;">Lab Description:</h3>
                                     <p class="text-left text-secondary mb-0;">
                                         The purpose of this lab is to become familiar with the Bluetooth Module on the Artemis board. Through the Bluetooth stack, communication 
                                         between the computer and Artemis board  was established, with the computer being the client and the Artemis board being the server. <br><br>
@@ -266,22 +266,24 @@
                                     </ul>
                                     </p>
                                     <hr>-->
-                                     <p class="text-left text-secondary mb-0;"> <h1> Prelab: </h1>
-                                          <p class="text-left text-secondary mb-0;"> <strong> Computer Setup: </strong> <br>
+                                    <h3 class="text-left text-secondary mb-0;"> Prelab:</h3>
+                                         <h4 class="text-left text-secondary mb-0;"> Computer Setup:</h4>
+                                          <p class="text-left text-secondary mb-0;"> 
                                              After installing the required softwares (Python 3, pip and Virtual Environment), I created a new virtual environment named FastRobots_ble. To use 
                                              the Python scripts (or Jupyter notebook), I activated the FastRobots_ble virtual environment and downloaded the required packages using the following 
                                              commands. <br>
-                                              
-                                    <!--<img src="Lab 2/activation.png" alt="Activation" style="width:40%;"><br>
-                                    <img src="Lab 2/install package.png" alt="Install package" style="width:70%">-->
+                                              <strong> >> source FastRobots_ble/bin/activate<br></strong>
+                                       <strong> >> pip install numpy pyyaml colorama nest_asyncio bleak jupyterlab<br>   </strong>  
                                     </p>
-                                          <p class="text-left text-secondary mb-0;"> <h2> Codebase: </h2> <br>
+                                    <h4 class="text-left text-secondary mb-0;"> Codebase:</h4>
+                                          <p class="text-left text-secondary mb-0;"> 
                                              Codebase includes both the base code will be necessary to establish a communication channel through BLE.
                                              </p>
                                  <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
                                         Install the ArduinoBLE from the Library Manager and upload the ble_arduino.ino into the board from the directory 
-                                        ble_arduino in the codebase. This printed the MAC address in Serial Monitor.
-                                    <img src="Lab 2/Mac_address.png" alt="Activation" style="width:60%">
+                                        ble_arduino in the codebase. This printed the MAC address in Serial Monitor.<br>
+                                     <strong>>> Advertising BLE with MAC: c0:83:9:69:4:3c</strong>
+                                    <!--<img src="Lab 2/Mac_address.png" alt="Activation" style="width:60%">-->
                                     </p>
                                 <hr>
                                     
@@ -295,13 +297,8 @@
                                       <p class="text-left text-secondary mb-0;"> <strong> demo.ipynb: </strong> <br>
                                          demo.ipynb is the main file for Jupyter Notebook to run commands and set up the bluetooth connection 
                                          between the computer and the board. <br><br>
-                                         <strong><em>Running all the cells in demo.ipynb: </em></strong><br>
-                                         <img src="Lab 2/demo_1.png" alt="demo_1" style="width:100%"><br>
-                                         <img src="Lab 2/demo_2.png" alt="demo_2" style="width:100%"><br>
-                                         <img src="Lab 2/demo_3.png" alt="demo_3" style="width:100%"><br>
-                                         <img src="Lab 2/demo_4.png" alt="demo_1" style="width:100%"><br>
-                                          <strong><em>Serial Monitor Output: </em></strong><br>
-                                         <img src="Lab 2/demo_SM_output.png" alt="Serial Monitor Output" style="width:50%"><br>
+                                          <iframe width=100% src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
+                                    
                                 </p>
                                     
                                         <p class="text-left text-secondary mb-0;"> <strong> Send Echo Command: </strong> <br>
