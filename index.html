@@ -185,14 +185,14 @@
                                        After downloading the Arduino IDE and Sparkfun Appollo 3 support software, we used various provided example codes to help us become 
                                        comfortable with programming the board by completing the following tasks.</p>
                                     <hr>
-                                    <!-- Part List-->
+                                    <!-- Part List
                                      <p class="text-left text-secondary mb-0;"> <strong> Parts Required: </strong> 
                                     <ul style="text-left text-secondary mb-0;">
                                     <li> 1 x SparkFun Red Board Artemis Nano</li>
                                     <li> 1 x USB C to C cable</li>
                                     </ul>
                                     </p>
-                                    <hr>
+                                    <hr>-->
                                      <p class="text-left text-secondary mb-0;"> <strong> Designs/Results: </strong> <br>
                                     <iframe width="560" height="345" src="https://www.youtube.com/embed/P2XlsybJ678?controls=1"> </iframe>   
                                     <!-- Conclusion:-->
@@ -257,21 +257,21 @@
                                         With the detailed instructions and knowledgeable course staffs, I learned to transmit and receive data using Python inside 
                                         a Jupyter notebook for the computer end and Arduino programming language for the Artemis side . </p>
                                     <hr>
-                                    <!-- Part List-->
+                                    <!-- Part List
                                      <p class="text-left text-secondary mb-0;"> Parts Required: </strong> 
                                     <ul style="text-left text-secondary mb-0;">
                                     <li> 1 x SparkFun Red Board Artemis Nano</li>
                                     <li> 1 x USB C to C cable</li>
                                     </ul>
                                     </p>
-                                    <hr>
+                                    <hr>-->
                                      <p class="text-left text-secondary mb-0;"> <strong> Prelab: </strong> <br>
                                           <p class="text-left text-secondary mb-0;"> <strong> Computer Setup: </strong> <br>
                                              After installing the required softwares (Python 3, pip and Virtual Environment), I created a new virtual environment named FastRobots_ble. To use 
                                              the Python scripts (or Jupyter notebook), I activated the FastRobots_ble virtual environment and downloaded the required packages using the following 
                                              commands. <br>
                                     <img src="Lab 2/activation.png" alt="Activation" style="width:40%;"><br><br>
-                                    <img src="Lab 2/install package.png" alt="Install package" style="width:50%">
+                                    <img src="Lab 2/install package.png" alt="Install package" style="width:70%">
                                     </p>
                                           <p class="text-left text-secondary mb-0;"> <strong> Codebase: </strong> <br>
                                              Codebase includes both the base code will be necessary to establish a communication channel through BLE.
@@ -279,7 +279,7 @@
                                  <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
                                         Install the ArduinoBLE from the Library Manager and upload the ble_arduino.ino into the board from the directory 
                                         ble_arduino in the codebase. This printed the MAC address in Serial Monitor.
-                                    <img src="Lab 2/Mac_address.png" alt="Activation" style="width:50%">
+                                    <img src="Lab 2/Mac_address.png" alt="Activation" style="width:60%">
                                     </p>
                                 <hr>
                                  <p class="text-left text-secondary mb-0;"> <strong> Tasks: </strong> <br>
@@ -287,6 +287,7 @@
                                         Update the configuration file <connection.yaml> with the displayed MAC address from Arduino Setup. Change the 
                                         default UUID with the newly generated UUID in both ble_arduino.ino and connection.yaml. 
                                         </p>
+                                         
                                       <p class="text-left text-secondary mb-0;"> <strong> demo.ipynb: </strong> <br>
                                          demo.ipynb is the main file for Jupyter Notebook to run commands and set up the bluetooth connection 
                                          between the computer and the board. <br>
@@ -298,12 +299,50 @@
                                           <strong><em>Serial Monitor Output: </em></strong><br>
                                          <img src="Lab 2/demo_SM_output.png" alt="Serial Monitor Output" style="width:50%"><br>
                                 </p>
-                                     <p class="text-left text-secondary mb-0;"> <strong> Send Echo Command: </strong> <br>
+                                    
+                                        <p class="text-left text-secondary mb-0;"> <strong> Send Echo Command: </strong> <br>
                                         The first task is to send an ECHO command with a string value as an argument from the computer to the Artemis board 
                                         and receive the augmented string back to the computer. For example, when I send <msg>, the computer receives “Robot says-> <msg> :)”.
                                         The implementation of this task uses the EString class to manipulate the string, specifically append( ) function. <br>
-                                       
+                                       <img src="Lab 2/Task1_python.png" alt="task 1" style="width:100%"><br>
                                         </p>
+                                            
+                                        <p class="text-left text-secondary mb-0;"> <strong> Get Time Command: </strong> <br>
+                                       The second task is to send  a GET_TIME_MILLIS command to the Artemis board and receive a string characteristic such as “T:123456”. 
+                                       In addition to the functions from the Estring class, I used millis() to get the time.  <br>
+                                       <img src="Lab 2/task2_python.png" alt="task 2" style="width:100%"><br>
+                                        </p>
+                                            
+                                       <p class="text-left text-secondary mb-0;"> <strong> Notification Handler: </strong> <br>
+                                       Previously, we have been using the recieve_string(uuid) command to receive the data that the Artemis board is sending back to the 
+                                           computer. This could raise a problem if the computer does not know when the Artemis board is sending the data. The purpose of 
+                                           this task is to solve the problem by implementing a notification handler function in the demo.ipynb. <br><br>
+                                        When the GET_TIME_MILLIS command was sent, start_notify(uuid, notification handler) triggered the notification_handler 
+                                        function. This function then received the string value (BLEStringCharacteristic) from the Arduino board and stored it in 
+                                           the global variable timelist.<br>
+                                       <img src="Lab 2/task3_python.png" alt="task 3" style="width:100%"><br>
+                                        </p>
+                                            
+                                        <p class="text-left text-secondary mb-0;"> <strong> Get Temperature Command: </strong> <br>
+                                            The fourth task is to send a GET_TEMP_5s command which sends an array of five timestamped internal die temperature readings 
+                                            for every second such as “T:06050|C:28.545|T:07084|C:28.537” (and so on). The implementation of this code used the Estring class 
+                                            and for-loop with one second delay <delay(1000)> to store the time <millis()> and temperature readings < getTempDegC()>. The code was 
+                                            then processed by the notification_handler_temp in the python code and stored it in the global variable temp_list. 
+                                       <br>
+                                       <img src="Lab 2/task4_python.png" alt="task 4" style="width:100%"><br><br>
+                                            
+                                            The fifth task is to send a GET_TEMP_5s_RAPID command which sends an array of five seconds worth of rapidly sampled temperature data.
+                                            Due to the characteristic size limit, the implementation of this code was changed from the previous task. For the GET_TEMP_5s, 
+                                            I appended each data to the Estring directly. Meanwhile, GET_TEMP_5s_RAPID was implemented using a while-loop with if-else condition. 
+                                            If the time is less than 5 seconds, store the data into an array. Or else append every 5 data into Estring and send it back as chunks
+                                            to the computer until all the data is sent.  The code was then processed by the notification_handler_temp in the python code and stored 
+                                            it in the global variable temprapid_list. As a result, GET_TEMP_5s_RAPID was able to rapidly collect and send 5 seconds worth of 250 
+                                            readings.<br>
+                                            <img src="Lab 2/task5_python.png" alt="task 5 python" style="width:100%"><br>
+                                            <img src="Lab 2/task5_result.png" alt="task 5 result" style="width:100%"><br>
+                                        </p>
+                                            
+                                        
                                          
                                          
                                     
