@@ -180,32 +180,32 @@
                                     <!-- Portfolio Modal - Image<img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 1"/>-->
                                     <!-- Portfolio Modal - Text-->
                                     <!-- Lab Description-->
-                                    <p class="text-left color:black;"> <strong>Lab Description: </strong> <br>
+                                     <p class="text-left text-secondary mb-0;"> <strong>Lab Description: </strong> <br>
                                         The purpose of this lab is to set up and become familiar with the Arduino IDE and the Artemis board. 
                                        After downloading the Arduino IDE and Sparkfun Appollo 3 support software, we used various provided example codes to help us become 
                                        comfortable with programming the board by completing the following tasks.</p>
                                     <hr>
                                     <!-- Part List-->
-                                    <p align=left> <strong> Parts Required: </strong> 
+                                     <p class="text-left text-secondary mb-0;"> <strong> Parts Required: </strong> 
                                     <ul style="text-align:left;">
                                     <li> 1 x SparkFun Red Board Artemis Nano</li>
                                     <li> 1 x USB C to C cable</li>
                                     </ul>
                                     </p>
                                     <hr>
-                                    <p align=left> <strong> Designs/Results: </strong> <br>
+                                     <p class="text-left text-secondary mb-0;"> <strong> Designs/Results: </strong> <br>
                                     <iframe width="560" height="345" src="https://www.youtube.com/embed/P2XlsybJ678?controls=1"> </iframe>   
                                     <!-- Conclusion:-->
-                                     <p align=left> <strong>Part 1: Blink it Up! </strong> <br>
+                                      <p class="text-left text-secondary mb-0;"> <strong>Part 1: Blink it Up! </strong> <br>
                                        The first task was to run the Blink code under Basics Example to ensure the built-in LEDs were working. 
                                          The example code uses <strong>digitalWrite</strong> and <strong>delay(1000)</strong> to toggle the LED on the board. As shown in the video, 
                                          the blue LED blinked in a consistent time interval every second when the code was run. </p>
-                                     <p align=left> <strong>Part 2: Serial </strong> <br>
+                                      <p class="text-left text-secondary mb-0;"> <strong>Part 2: Serial </strong> <br>
                                        The second task was to run the Example04_Serial under the Artemis Example to ensure that the serial port was 
                                          working properly. The example code uses <strong>Serial.read</strong> to read the Serial Input and uses <strong>Serial.write</strong> to echo 
                                          it back to the Serial Output. In the video, I demonstrated that the Arduino’s serial port is functioning properly by 
                                          showing that the code echoed back when I typed “hello” into the Serial Monitor. </p>
-                                     <p align=left> <strong>Part 3: analog_Read Temperature </strong> <br>
+                                      <p class="text-left text-secondary mb-0;"> <strong>Part 3: analog_Read Temperature </strong> <br>
                                        The third task was to run the Example02_analongRead under Artemis Example to ensure that the on-chip ADC on the 
                                          Artemis board was working. The example code printed several outputs calculated by the ADC's measured analog voltage value to help us test 
                                          the temperature sensor. Besides the internal die temperature, the code also printed external (counts) 
@@ -214,7 +214,7 @@
                                          the temp (counts) increase gradually to the 33,700 range. This verified that the sensor was functioning properly because 
                                          the increase in temp (count) corresponds to the increase in the internal die temperature on the sensor as the board was 
                                          heated by my hand. </p>
-                                     <p align=left> <strong>Part 4: PDM [Pulse Density Modulation] </strong> <br>
+                                      <p class="text-left text-secondary mb-0;"> <strong>Part 4: PDM [Pulse Density Modulation] </strong> <br>
                                        The fourth task was to run the Example1_MicrophoneOutput under PDM Example to test that the MEMS microphone on 
                                          the Artemis board is working. The PDM Microphone Output example configures the PDM microphone based on the
                                          microcontroller and PDM clock speed to determine the sampling frequency. The code then performs an FFT to 
@@ -258,36 +258,36 @@
                                         a Jupyter notebook for the computer end and Arduino programming language for the Artemis side . </p>
                                     <hr>
                                     <!-- Part List-->
-                                    <p align=left> <strong> Parts Required: </strong> 
+                                     <p class="text-left text-secondary mb-0;"> Parts Required: </strong> 
                                     <ul style="text-align:left;">
                                     <li> 1 x SparkFun Red Board Artemis Nano</li>
                                     <li> 1 x USB C to C cable</li>
                                     </ul>
                                     </p>
                                     <hr>
-                                    <p align=left> <strong> Prelab: </strong> <br>
-                                         <p align=left> <strong> Computer Setup: </strong> <br>
+                                     <p class="text-left text-secondary mb-0;"> <strong> Prelab: </strong> <br>
+                                          <p class="text-left text-secondary mb-0;"> <strong> Computer Setup: </strong> <br>
                                              After installing the required softwares (Python 3, pip and Virtual Environment), I created a new virtual environment named FastRobots_ble. To use 
                                              the Python scripts (or Jupyter notebook), I activated the FastRobots_ble virtual environment and downloaded the required packages using the following 
                                              commands. <br>
                                     <img src="Lab 2/activation.png" alt="Activation" style="width:100%;"><br><br>
                                     <img src="Lab 2/install package.png" alt="Install package" style="width:100%">
                                     </p>
-                                         <p align=left> <strong> Codebase: </strong> <br>
+                                          <p class="text-left text-secondary mb-0;"> <strong> Codebase: </strong> <br>
                                              Codebase includes both the base code will be necessary to establish a communication channel through BLE.
                                              </p>
-                                <p align=left> <strong> Arduino Setup: </strong> <br>
+                                 <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
                                         Install the ArduinoBLE from the Library Manager and upload the ble_arduino.ino into the board from the directory 
                                         ble_arduino in the codebase. This printed the MAC address in Serial Monitor.
                                     <img src="Lab 2/Mac_address.png" alt="Activation" style="width:100%">
                                     </p>
                                 <hr>
-                                <p align=left> <strong> Tasks: </strong> <br>
-                                    <p align=left> <strong> Configurations: </strong> <br>
+                                 <p class="text-left text-secondary mb-0;"> <strong> Tasks: </strong> <br>
+                                     <p class="text-left text-secondary mb-0;"> <strong> Configurations: </strong> <br>
                                         Update the configuration file <connection.yaml> with the displayed MAC address from Arduino Setup. Change the 
                                         default UUID with the newly generated UUID in both ble_arduino.ino and connection.yaml. 
                                         </p>
-                                     <p align=left> <strong> demo.ipynb: </strong> <br>
+                                      <p class="text-left text-secondary mb-0;"> <strong> demo.ipynb: </strong> <br>
                                          demo.ipynb is the main file for Jupyter Notebook to run commands and set up the bluetooth connection 
                                          between the computer and the board. <br>
                                          <em>Running all the cells in demo.ipynb: </em><br>
@@ -298,7 +298,7 @@
                                          <em>Serial Monitor Output: </em><br>
                                          <img src="Lab 2/demo_SM_output.png" alt="Serial Monitor Output" style="width:450px;height:230px;"><br>
                                 </p>
-                                    <p align=left> <strong> Send Echo Command: </strong> <br>
+                                     <p class="text-left text-secondary mb-0;"> <strong> Send Echo Command: </strong> <br>
                                         The first task is to send an ECHO command with a string value as an argument from the computer to the Artemis board 
                                         and receive the augmented string back to the computer. For example, when I send <msg>, the computer receives “Robot says-> <msg> :)”.
                                         The implementation of this task uses the EString class to manipulate the string, specifically append( ) function. <br>
