@@ -267,13 +267,14 @@
                                     </p>
                                     <hr>-->
                                     <h3 class="text-left text-secondary mb-0;"> Prelab:</h3>
-                                         <h4 class="text-left text-secondary mb-0;"> Computer Setup:</h4>
+                                         <h6 class="text-left text-secondary mb-0;"> Computer Setup:</h6>
                                           <p class="text-left text-secondary mb-0;"> 
                                              After installing the required softwares (Python 3, pip and Virtual Environment), I created a new virtual environment named FastRobots_ble. To use 
                                              the Python scripts (or Jupyter notebook), I activated the FastRobots_ble virtual environment and downloaded the required packages using the following 
                                              commands. <br>
-                                              <strong> >> source FastRobots_ble/bin/activate<br></strong>
-                                       <strong> >> pip install numpy pyyaml colorama nest_asyncio bleak jupyterlab<br>   </strong>  
+                                              <span style= " text-teal "> >> source FastRobots_ble/bin/activate<br>
+                                                  >> pip install numpy pyyaml colorama nest_asyncio bleak jupyterlab<br>
+                                              </span>
                                     </p>
                                     <h4 class="text-left text-secondary mb-0;"> Codebase:</h4>
                                           <p class="text-left text-secondary mb-0;"> 
@@ -287,50 +288,56 @@
                                     </p>
                                 <hr>
                                     
-                                 <p class="text-left text-secondary mb-0;"> <strong>Tasks: </strong>
-                                     
-                                     <p class="text-left text-secondary mb-0;"> <strong> Configurations: </strong> <br>
+                                  <h3 class="text-left text-secondary mb-0;">Task: </h3>  
+                                     <h6 class="text-left text-secondary mb-0;">Configurations: </h6>
+                                     <p class="text-left text-secondary mb-0;"> 
                                         Update the configuration file <connection.yaml> with the displayed MAC address from Arduino Setup. Change the 
                                         default UUID with the newly generated UUID in both ble_arduino.ino and connection.yaml. 
                                         </p>
-                                         
-                                      <p class="text-left text-secondary mb-0;"> <strong> demo.ipynb: </strong> <br>
+                                        
+                                          <h6 class="text-left text-secondary mb-0;">demo.ipynb: </h6>
+                                      <p class="text-left text-secondary mb-0;"> 
                                          demo.ipynb is the main file for Jupyter Notebook to run commands and set up the bluetooth connection 
                                          between the computer and the board. <br><br>
-                                          <iframe width=100% src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
+                                          <iframe width=100% height=100% src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
+                                        </p>
                                     
-                                </p>
-                                    
-                                        <p class="text-left text-secondary mb-0;"> <strong> Send Echo Command: </strong> <br>
+                                        <h6 class="text-left text-secondary mb-0;">Send Echo Command: </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
                                         The first task is to send an ECHO command with a string value as an argument from the computer to the Artemis board 
                                         and receive the augmented string back to the computer. For example, when I send <msg>, the computer receives “Robot says-> <msg> :)”.
                                         The implementation of this task uses the EString class to manipulate the string, specifically append( ) function. <br>
-                                       <img src="Lab 2/Task1_python.png" alt="task 1" style="width:100%"><br>
+                                        <iframe width=100% height=100% src="https://www.youtube.com/embed/QIh6hJBHRto?controls=1"> </iframe>  
                                         </p>
-                                            
-                                        <p class="text-left text-secondary mb-0;"> <strong> Get Time Command: </strong> <br>
+                                          
+                                       <h6 class="text-left text-secondary mb-0;">Get Time Command: </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
                                        The second task is to send  a GET_TIME_MILLIS command to the Artemis board and receive a string characteristic such as “T:123456”. 
                                        In addition to the functions from the Estring class, I used millis() to get the time.  <br>
-                                       <img src="Lab 2/task2_python.png" alt="task 2" style="width:100%"><br>
+                                        <iframe width=100% height=100% src="https://www.youtube.com/embed/nLswzmc5UQc?controls=1"> </iframe>  
                                         </p>
                                             
-                                       <p class="text-left text-secondary mb-0;"> <strong> Notification Handler: </strong> <br>
+                                            
+                                       <h6 class="text-left text-secondary mb-0;">Notification Handler:  </h6>
+                                       <p class="text-left text-secondary mb-0;"> 
                                        Previously, we have been using the recieve_string(uuid) command to receive the data that the Artemis board is sending back to the 
                                            computer. This could raise a problem if the computer does not know when the Artemis board is sending the data. The purpose of 
                                            this task is to solve the problem by implementing a notification handler function in the demo.ipynb. <br><br>
                                         When the GET_TIME_MILLIS command was sent, start_notify(uuid, notification handler) triggered the notification_handler 
                                         function. This function then received the string value (BLEStringCharacteristic) from the Arduino board and stored it in 
                                            the global variable timelist.<br>
-                                       <img src="Lab 2/task3_python.png" alt="task 3" style="width:100%"><br>
+                                            <iframe width=100% height=100% src="https://www.youtube.com/embed/lVTe-W2yW9k?controls=1"> </iframe>  
                                         </p>
                                             
-                                        <p class="text-left text-secondary mb-0;"> <strong> Get Temperature Command: </strong> <br>
+                                            <h6 class="text-left text-secondary mb-0;">Get Temperature Command:  </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
                                             The fourth task is to send a GET_TEMP_5s command which sends an array of five timestamped internal die temperature readings 
                                             for every second such as “T:06050|C:28.545|T:07084|C:28.537” (and so on). The implementation of this code used the Estring class 
                                             and for-loop with one second delay <delay(1000)> to store the time <millis()> and temperature readings < getTempDegC()>. The code was 
                                             then processed by the notification_handler_temp in the python code and stored it in the global variable temp_list. 
                                        <br>
-                                       <img src="Lab 2/task4_python.png" alt="task 4" style="width:100%"><br><br>
+                                             <iframe width=100% height=100% src="https://www.youtube.com/embed/QRJBMSH7AYw?controls=1"> </iframe>  
+                                       
                                             
                                             The fifth task is to send a GET_TEMP_5s_RAPID command which sends an array of five seconds worth of rapidly sampled temperature data.
                                             Due to the characteristic size limit, the implementation of this code was changed from the previous task. For the GET_TEMP_5s, 
@@ -339,8 +346,8 @@
                                             to the computer until all the data is sent.  The code was then processed by the notification_handler_temp in the python code and stored 
                                             it in the global variable temprapid_list. As a result, GET_TEMP_5s_RAPID was able to rapidly collect and send 5 seconds worth of 250 
                                             readings.<br>
-                                            <img src="Lab 2/task5_python.png" alt="task 5 python" style="width:100%"><br>
-                                            <img src="Lab 2/task5_result.png" alt="task 5 result" style="width:100%"><br>
+                                             <iframe width=100% height=100% src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  
+                                            
                                         </p>
                                     <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
