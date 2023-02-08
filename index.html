@@ -354,7 +354,20 @@
                                                 to the computer until all the data is sent.</i> The code was then processed by the <strong>notification_handler_temp</strong> in the python code and stored 
                                             it in the global variable <strong>temprapid_list</strong>. As a result, <strong>GET_TEMP_5s_RAPID</strong> was able to rapidly collect and send 5 seconds worth of <em>250 
                                             readings</em>.<br><br>
-                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  
+                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  <br>
+                                            
+                                            <h5 class="text-left text-secondary mb-0;">Limitations:  </h5>
+                                            <p class="text-left text-secondary mb-0;"> 
+                                                Working with strings introduces significant latency due to a huge number of processor cycles that is required to construct a string
+                                                message. This limitation could raise a problem when the task requires relaying the data at a high rate. In these situations, 
+                                                communicating results in chunks by storing and relaying data at different times is necessary to be able to accomplish the task. 
+                                                The physical memory limitation of Artemis board is discussed in the following passage.<br>
+                                                
+                                                The Artemis board has 384 kB(=384,00 bytes) of RAM. If we are sending 16-bit (=2 bytes) values at 150 Hz for 5 seconds, we will 
+                                                be sending 1500 bytes of data. Therefore, the board can store 5 seconds worth of data at this rate for <strong>256 times</strong> before running out of memory.
+
+                                        </p>
+                                            
                                             
                                         </p>
                                     <hr>
