@@ -278,18 +278,11 @@
                                     </p>
                                     <h5 class="text-left text-secondary mb-0;"> Codebase:</h5>
                                           <p class="text-left text-secondary mb-0;"> 
-                                             Codebase includes the base code that will be necessary to establish a communication channel through BLE.
+                                             The subfolders of the Codebase are <strong>ble_arduino:</strong> which includes the Arduino code that will be run on the Artemis board and necessary class definitions, and <strong>ble_python</strong> 
+                                              which includes the files such as demo.ipynb, connection.yaml, and others that are necessary to establish a communication channel through BLE.
                                              </p>
-                                    <!--
-                                 <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
-                                     Install the <strong>ArduinoBLE</strong> from the Library Manager and upload the <strong>ble_arduino.ino</strong> into the board from the directory 
-                                     <strong>ble_arduino</strong> in the codebase. This printed the MAC address in Serial Monitor.<br>
-                                     <em><strong>>> Advertising BLE with MAC: c0:83:9:69:4:3c</strong></em>
-                                    </p>-->
-                                <hr>
                                     
-                                  <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Task: </h3>  </u>
-                                     <h5 class="text-left text-secondary mb-0;">Configurations: </h5>
+                                       <h5 class="text-left text-secondary mb-0;">Configurations: </h5>
                                      <p class="text-left text-secondary mb-0;"> 
                                         I updated the configuration file <strong><connection.yaml></strong> with the displayed MAC address from uploading the <i>ble_arduino.ino</i> to the Artemis board. Then I changed the 
                                         default UUID with the newly generated UUID in both <strong>ble_arduino.ino</strong> and <strong>connection.yaml</strong>. 
@@ -305,6 +298,16 @@
                                           
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
                                         </p>
+                                    <!--
+                                 <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
+                                     Install the <strong>ArduinoBLE</strong> from the Library Manager and upload the <strong>ble_arduino.ino</strong> into the board from the directory 
+                                     <strong>ble_arduino</strong> in the codebase. This printed the MAC address in Serial Monitor.<br>
+                                     <em><strong>>> Advertising BLE with MAC: c0:83:9:69:4:3c</strong></em>
+                                    </p>-->
+                                <hr>
+                                    
+                                  <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Task: </h3>  </u>
+                                  
                                     
                                         <h5 class="text-left text-secondary mb-0;">Send Echo Command: </h5>
                                         <p class="text-left text-secondary mb-0;"> 
