@@ -82,7 +82,7 @@
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/game.png" alt="Controller"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/Lab 2 profile.png" alt="Lab 3 Profile"/>
                         </div>
                     </div>
                     <!-- Portfolio Items 4-->
@@ -394,16 +394,161 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">LAB 3: TOF & IMU</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">LAB 3: Time-of-Flight (TOF)</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="LAB 3"/>
+                                    <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                       <!-- Lab Description-->
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                        In this lab, we set up and equipped the robot with two Time-of-Flight (TOF) sensors. These sensors characterize 
+                                        the capabilities of the robot in two ways. First, the faster the sensors can sample, the more the robot can trust 
+                                        sensor readings, and the faster the robot can drive. Second, the more accurate the sample readings, the more the robot 
+                                        behaves as we expect, and the better control of the robot. Therefore, we explored the limitations of the speed and 
+                                        accuracy of the data that the sensors collect.  </p>
+                                    <hr>
+                                    <!-- Part List
+                                     <p class="text-left text-secondary mb-0;"> Parts Required: </strong> 
+                                    <ul style="text-left text-secondary mb-0;">
+                                    <li> 1 x SparkFun Red Board Artemis Nano</li>
+                                    <li> 1 x USB C to C cable</li>
+                                    </ul>
+                                    </p>
+                                    <hr>-->
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;"> Prelab:</h3></u>
+                                         <h5 class="text-left text-secondary mb-0;"> I2C Sensor Address: </h5>
+                                          <p class="text-left text-secondary mb-0;"> 
+                                             According to the datasheet of the TOF sensor, the I2C serial bus uses the sensor address
+                                              (0x52) that is hardwired on the board. This could lead to a problem when we need to use
+                                              multiple sensors together since the computer will not be able to distinguish them. Since we are 
+                                              using two TOF sensors in this lab, we need to either change the address programmatically (while powered)
+                                              or enable the two sensors separately through the shutdown pins. <br><br>
+                                              <strong>Changing the address programmatically (while power)</strong> method is to change the I2C address of one of the TOF 
+                                              sensors while we shutdown the other one using the Xshut pin. This way the computer can distinguish between 
+                                              the data received from the sensors (with different I2C addresses). This method allows us to communicate the sensors 
+                                              simultaneously without having to shut down either one of the sensors. Since powering off the sensors reset the address 
+                                              to default address, this method does require us to change the address every time we power it on. <br><br>
+                                              <strong>Enabling the two sensors separately through the shut down pins</strong> method is to pull the shutdown pin of one of the sensors
+                                              every time the other sensor is reading the data using the I2C address (which is the same address). This method allows us 
+                                              to save the power by turning off one of the sensors while it is not in use. But since we need to ensure that only one of the 
+                                              sensors is turned on at all times, we need to implement additional logic to the program. Additionally, this could also create 
+                                              delays to the program due to the extra lines of codes that are enabling and disabling the sensors. 
+
+                                    </p>
+                                    <h5 class="text-left text-secondary mb-0;">Positioning TOF Sensors:  </h5>
+                                          <p class="text-left text-secondary mb-0;"> 
+                                            After discussing with the course staff, I have decided to attach my TOF sensors one at the front and the other one at the side. <br><br>
+                                              This placement gives more advantages for mapping the robot than placing both of the sensors at the front or side. By attaching
+                                              the sensor at the side of the robot, I am able to gain more information to figure out the positioning of the robot. Similarly,
+                                              by attaching the second sensor at the front, the robot will be able to receive sensor readings when there is something in the front 
+                                              rather than randomly bumping into things. <br><br>
+                                              The disadvantage of this sensor placement is it has slightly higher ranging error than placing both of the sensors 
+                                              at the front. Additionally, since it only covers one side view of the robot, it could miss the obstacles that are on the 
+                                              side without the TOF sensor.
+                                    </p>
+                                    
+                                       <h5 class="text-left text-secondary mb-0;">Wiring the TOF sensors: </h5>
+                                     <p class="text-left text-secondary mb-0;"> 
+                                            Attaching the TOF sensors to the QWIIC breakout board is straightforward. We cut one end of a QWIIC cable and solder the other to the 
+                                         TOF sensors with the correct wire color as shown in the following table.    
+                                         <img src="Lab 3/wire_color.png" alt="wire color" style="width:100%">
+                                         
+                                    </p>
+                                          <h5 class="text-left text-secondary mb-0;">Wiring Diagram: </h5>
+                                         <img src="Lab 3/wirediagram.png" alt="wiring diagram" style="width:100%">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                          <h5 class="text-left text-secondary mb-0;">demo.ipynb: </h5>
+                                      <p class="text-left text-secondary mb-0;"> 
+                                          <strong>demo.ipynb</strong> is the main file for Jupyter Notebook to run commands and set up the Bluetooth connection 
+                                         between the computer and the board. It includes the <strong>ArtemisBLEController Class</strong> which provides the member 
+                                          functions that handle all of the BLE operations used in this lab. In the following video, I ran all the cells inside the <strong>demo.ipynb</strong> file by default.
+                                           <br><br>
+                                          
+                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/JE5C7tXWXAo?controls=1"> </iframe>   
+                                        </p>
+                                    <!--
+                                 <p class="text-left text-secondary mb-0;"> <strong> Arduino Setup: </strong> <br>
+                                     Install the <strong>ArduinoBLE</strong> from the Library Manager and upload the <strong>ble_arduino.ino</strong> into the board from the directory 
+                                     <strong>ble_arduino</strong> in the codebase. This printed the MAC address in Serial Monitor.<br>
+                                     <em><strong>>> Advertising BLE with MAC: c0:83:9:69:4:3c</strong></em>
+                                    </p>-->
+                                <hr>
+                                    
+                                  <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Task: </h3>  </u>
+                                  
+                                    
+                                        <h5 class="text-left text-secondary mb-0;">Send Echo Command: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            The first task is to send an <strong>ECHO</strong> command with a string value as an argument from the computer to the Artemis board 
+                                        and receive the augmented string back to the computer. For example, when I send "HELLoo" as demonstrated in the video, the computer receives <strong>“Robot says-> HELLoo:)”</strong>.
+                                        The implementation of this task uses the EString class to manipulate the string, specifically <strong>append( )</strong> function. <br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/QIh6hJBHRto?controls=1"> </iframe>  
+                                        </p>
+                                          
+                                       <h5 class="text-left text-secondary mb-0;">Get Time Command: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                       The second task is to send  a <strong>GET_TIME_MILLIS</strong> command to the Artemis board and receive a string characteristic such as <strong>“T:87373”</strong> as shown in the video. 
+                                       In addition to the functions from the Estring class, I used <strong>millis()</strong> to get the time.  <br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/nLswzmc5UQc?controls=1"> </iframe>  
+                                        </p>
+                                            
+                                            
+                                       <h5 class="text-left text-secondary mb-0;">Notification Handler:  </h5>
+                                       <p class="text-left text-secondary mb-0;"> 
+                                       Previously, we have been using the <strong>recieve_string(uuid)</strong> command to receive the data that the Artemis board is sending back to the 
+                                           computer. This could raise a problem if the computer does not know when the Artemis board is sending the data. The purpose of 
+                                           this task is to solve the problem by implementing a notification handler function in the <strong>demo.ipynb</strong>. <br><br>
+                                        When the <strong>GET_TIME_MILLIS</strong> command was sent, <strong>start_notify(uuid, notification handler)</strong> triggered the <strong>notification_handler</strong> 
+                                        function. This function then received the string value <strong>(BLEStringCharacteristic)</strong> from the Arduino board and stored it in 
+                                           the global variable <strong>timelist</strong>.<br><br>
+                                            <iframe width="560" height="345" src="https://www.youtube.com/embed/lVTe-W2yW9k?controls=1"> </iframe>  
+                                        </p>
+                                            
+                                            <h5 class="text-left text-secondary mb-0;">Get Temperature Command:  </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            The fourth task is to send a <strong>GET_TEMP_5s</strong> command which sends an array of five timestamped internal die temperature readings 
+                                            for every second such as “T:06050|C:28.545|T:07084|C:28.537” (and so on). The implementation of this code used the Estring class 
+                                            and for-loop with one second delay <strong><delay(1000)></strong> to store the time <strong><millis()></strong> and temperature readings <strong><getTempDegC()></strong>. The code was 
+                                            then processed by the <strong>notification_handler_temp</strong> in the python code and stored it in the global variable <strong>temp_list</strong>. 
+                                       <br><br>
+                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/QRJBMSH7AYw?controls=1"> </iframe>  <br>
+                                       
+                                            
+                                            The fifth task is to send a <strong>GET_TEMP_5s_RAPID</strong> command which sends an array of five seconds worth of rapidly sampled temperature data.
+                                            Due to the characteristic size limit, the implementation of this code was changed from the previous task. For the <strong>GET_TEMP_5s</strong>, 
+                                            I appended each data to the Estring directly. Meanwhile, <strong>GET_TEMP_5s_RAPID</strong> was implemented using a while-loop with if-else condition. 
+                                            <i>If the time is less than 5 seconds, store the data into an array. Or else append every 5 data into Estring and send it back as chunks
+                                                to the computer until all the data is sent.</i> The code was then processed by the <strong>notification_handler_temp</strong> in the python code and stored 
+                                            it in the global variable <strong>temprapid_list</strong>. As a result, <strong>GET_TEMP_5s_RAPID</strong> was able to rapidly collect and send 5 seconds worth of <em>250 
+                                            readings</em>.<br><br>
+                                             <iframe width="560" height="345" src="https://www.youtube.com/embed/O3iDkljek00?controls=1"> </iframe>  <br>
+                                            
+                                            <h5 class="text-left text-secondary mb-0;">Limitations:  </h5>
+                                            <p class="text-left text-secondary mb-0;"> 
+                                                Working with strings introduces significant latency due to a huge number of processor cycles that is required to construct a string
+                                                message. This limitation could raise a problem when the task requires relaying the data at a high rate. In these situations, 
+                                                communicating results in chunks by storing and relaying data at different times is necessary to be able to accomplish the task. 
+                                                The physical memory limitation of Artemis board is discussed in the following passage.<br><br>
+                                                
+                                                The Artemis board has 384 kB(=384,00 bytes) of RAM. If we are sending 16-bit (=2 bytes) values at 150 Hz for 5 seconds, we will 
+                                                be sending 1500 bytes of data. Therefore, the board can store 5 seconds worth of data at this rate for <strong>256 times</strong> before running out of memory.
+
+                                        </p>
+                                            </p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
