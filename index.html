@@ -468,23 +468,29 @@
                                          </p>
                                       <h5 class="text-left text-secondary mb-0;">Artemis Scanning for I2C Address: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
-                                         When I connected 1 TOF sensor and ran the Example05_Wire_I2C file, the code printed out the 
-                                          following line in the serial monitor. It printed 0x29 as the I2C address rather than 0x52 because 
-                                          the address is bit shifted and the last bit is for the read write status. <br>
+                                         When I connected 1 TOF sensor and ran the Example05_Wire_I2C file, the code printed out the following line in the serial monitor. 
+                                          It printed 0x29 as the I2C address rather than 0x52. This is because I2C uses the LSB of the address for indicating read/
+                                          write status which leads the address to bit shift.<br>
                                            <img src="Lab 3/I2Caddress.png" alt="I2C address" style="width:100%">
                                     </p>
                                      <h5 class="text-left text-secondary mb-0;">TOF Modes: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
                                           From the data sheet, the TOF sensor can work in three different modes as shown in the table below.
-                                          While the long distance mode covers longer ranging distance, the short distance mode performs better in shorter 
+                                          While the <strong>long distance mode</strong> covers longer ranging distance, the <strong>short distance mode</strong> performs better in shorter 
                                           range for different ambient lighting conditions (light or dark). <br><br>
                                           For our robot, the short mode might be the best choice to start because the long mode 
                                           is sensitive to the environment lighting conditions (especially high brightness). If the setup 
                                           of the potential obstacles required us to work with longer distances, then we can switch the mode
                                           to medium or long depending on the maximum required ranging distance.<br><br>
-                                          <img src="Lab 3/distancemode.png" alt="Distance Modes" style="width:100%">
-                                          
-                                          
+                                          <img src="Lab 3/distancemode.png" alt="Distance Modes" style="width:100%"><br>
+                                          To test the accuracy, and repeatability of the sensor for the short mode, I took the 20 measurements 
+                                          in every 100 mm from 100 mm to 500 mm using SparkFun <strong>Example1_ReadDistance</strong> code. The graph that is plotted
+                                          below is the mean and standard deviation from each distance for <em>(1) with StopRanging, (2) without StopRanging,
+                                          and (3) Just reading. </em><br><br>
+                                          From observing the data, the measured data in the short mode has both high accuracy (mean ~ actual distance) and precision
+                                          (low standard deviation). The average ranging time was around <strong>98.9 ms</strong> for with StopRanging, <strong>96.5 ms</strong> 
+                                          for without StopRanging, and <strong>92.3 ms</strong> for Just reading. 
+                                          <img src="Lab 3/shortreading.png" alt="Short Distance Mode Readings" style="width:100%"><br>
                                     </p>
                                     <h5 class="text-left text-secondary mb-0;">2-TOF Sensors Working in Parallel: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
@@ -495,19 +501,37 @@
                                           XSHUT is wired to the pin 8 on the Artemis board. Setting the voltage to low activates the XSHUT and 
                                           setting the voltage to high deactivates the XSHUT. <br><br>
                                           In the following video, I demonstrated that the two sensors were working in parallel properly by 
-                                          testing (a) both at 300 mm, (b) one at 150 mm and one at 300 mm, and (c) both at 150 mm. <br>
+                                          testing <em>(a) both at 300 mm, (b) one at 150 mm and one at 300 mm, and (c) both at 150 mm. </em><br>
                                            <iframe width="560" height="345" src="https://www.youtube.com/embed/6KwWlo6cKfU?controls=1"> </iframe>   
                                     </p>
                                     
                                     <h5 class="text-left text-secondary mb-0;">TOF Sensor Speed: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
-                                        
-                                          
+                                          I modified the SparkFun <strong>Example1_ReadDistance</strong> code to print the Artemis clock to 
+                                          the Serial Monitor as fast as possible, continuously, and only prints the data from the sensors when they are
+                                          available. <br>
+                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/b7vrxOqq2tM?controls=1"> </iframe> <br><br>
+                                          In order to analyze the sensor speed, I modified the previous code to print the following information in the Serial Monitor 
+                                          instead using the code below: <em>Current Time, Ranging Time, Distance from Sensor 1, Distance from Sensor 2. </em><br>
+                                          <strong>Arduino Code:</strong>
+                                          <img src="Lab 3/SensorSpeed.png" alt="SensorSpeed code" style="width:100%"><br><br>
+                                          From observing the Serial Monitor output shown below, it seems that the ranging time for the sensors range from <strong>79-98 ms</strong>. 
+                                          The ranging time can be lowered by decreasing the collection time given to the sensor with the trade off to the accuracy of the readings.<br>
+                                          <strong>Serial Monitor Output:</strong>
+                                          <img src="Lab 3/Speed.png" alt="Serial Monitor Output" style="width:100%"><br>
                                     </p>
                                     <h5 class="text-left text-secondary mb-0;">Time vs Distance: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
-                                        
-                                          
+                                          Due to the characteristic size limit, relaying all the data at once is impossible. Therefore, 
+                                          I let the two sensors record the data at one time and sent the data over Bluetooth to my computer 
+                                          at a different time. In the following video, I demonstrated this by <em>sending the Artemis clock while the
+                                          sensor is not ready otherwise relay distance sensors reading.</em><br>
+                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/alB5DNFwNlc?controls=1"> </iframe> <br><br>
+                                          For the last task, I revised the previous code to graph the <strong>Time vs. Distance</strong> graph of the data sent over the Bluetooth. 
+                                          In the following video, I demonstrated running the python code to plot the data. <br>
+                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/dmxw4xX7Oqk?controls=1"> </iframe> <br><br>
+                                          <strong>Output Graph:</strong>
+                                          <img src="Lab 3/Time_vs_distance.png" alt="Time vs. distance Graph" style="width:100%"><br>
                                     </p>
                                     </p>
                                     <hr>
