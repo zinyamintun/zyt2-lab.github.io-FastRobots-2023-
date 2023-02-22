@@ -575,7 +575,7 @@
                                     <hr>-->
                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;"> Tasks: </h3></u>
                                          <h5 class="text-left text-secondary mb-0;"> Set up the IMU: </h5>
-                                        <img src="Lab 4/WechatIMG118.png" alt="IMU connection" style="width:100%"><br>
+                                        <img src="Lab 4/WechatIMG118.png" alt="IMU connection" style="width:100%"><br><br>
                                           <p class="text-left text-secondary mb-0;"> 
                                              In the following video, I tested that the IMU sensor is working by running <strong>SparkFun 
                                               Example1_Basics code</strong>. I demonstrated accelerating and rotating the IMU along the x-y-z axis
@@ -597,7 +597,7 @@
                                               I also used the <em>Arduino Serial Plotter</em> to plot the output as shown below.<br><br>
                                               <strong>Acceleration (x-y-z) of Stationary IMU: </strong><br>
                                               <img src="Lab 4/WechatIMG101.png" alt="accel" style="width:100%"><br><br>
-                                              As I mentioned above, the acceleration for x and y are zero while z direction is 1000 m/sec^2 due to the 
+                                              As I mentioned above, the acceleration for x and y are zero while z direction is around 10 m/sec^2 due to the 
                                               gravitational acceleration.<br><br>
                                               <strong>Gyroscope (x-y-z) of Stationary IMU: </strong><br>
                                                <img src="Lab 4/gyr.png" alt="gyr" style="width:100%"><br><br>
@@ -618,34 +618,39 @@
                                               low pass filter in the IMU that is activated by default which filtered out the taps. <br><br>
                                                <img src="Lab 4/fft_pitch.png" alt="fft_pitch" style="width:100%"><br><br>
                                               <img src="Lab 4/fft_roll.png" alt="fft_roll" style="width:100%"><br><br>
-                                              To prepare for the future lab, I implemented a low pass filter starting with a frequency of 30 Hz. This frequency can be tuned later with the actual
+                                              To prepare for the future lab, I implemented a low pass filter starting with a frequency of <strong>30 Hz</strong>. This frequency can be tuned later with the actual
                                               frequency of noises on the IMU depending on the speed of the robot. <br><br>
                                               The equation I used for the low pass filter is as follows:<br><br>
                                                <img src="Lab 4/LPF.png" alt="lpf" style="width:100%"><br><br>
-                                              Using fc as 30 Hz, alpha is calculated to be 0.4299. Similar to the previous video, I demonstrated 
+                                              Using fc as <strong>30 Hz</strong>, alpha is calculated to be <strong>0.4299</strong>. Similar to the previous video, I demonstrated 
                                               the accelerometer with LPF output on Serial Plotter and observed that there is less noise. <br><br>
                                                <iframe width="560" height="345" src="https://www.youtube.com/embed/_XI3xnrD87w?controls=1"> </iframe> 
                                     </p>
                                     
                                        <h5 class="text-left text-secondary mb-0;">Gyroscope: </h5>
                                      <p class="text-left text-secondary mb-0;"> 
-                                           Using the gyroscope,  pitch, roll, and yaw can be determined using the following equations.<br>
+                                           Using the gyroscope,  pitch, roll, and yaw can be determined using the following equations.<br><br>
                                           <img src="Lab 4/gyr.png" alt="lpf" style="width:100%"><br><br>
                                          In the video below, I demonstrated the Gyroscope data using Serial Plotter at [-90, 0, 90] position for  Pitch, Roll, and Yaw. <br><br>
                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/mkrCNZBPqtA?controls=1"> </iframe> <br><br>
-                                         From observing the video, we can see that the lines are drifting away while I am trying to hold them in the same position. From this we can conclude that the gyroscope is complementary to the accelerometer because it has low noise but has drifts in the calculations. From the equations above, the drift in the gyroscope calculation increases as the sampling rate dt increases. To compensate for the gyroscope drifting and accelerometer noises, I implemented a complementary filter using the following equation where the alpha is still 0.4299.<br><br>
+                                         From observing the video, we can see that the lines are drifting away while I am trying to hold them in the same position. From this 
+                                         we can conclude that the gyroscope is complementary to the accelerometer because it has low noise but has drifts in the calculations.
+                                         From the equations above, the drift in the gyroscope calculation increases as the <em>sampling rate: dt</em> increases. To compensate for the gyroscope
+                                         drifting and accelerometer noises, I implemented a complementary filter using the following equation where the alpha is still 0.4299.<br><br>
                                          <img src="Lab 4/compli_filter.png" alt="compli_filter" style="width:100%"><br><br>
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/4col2BU_6-0?controls=1"> </iframe> <br><br>
-                                         After applying complementary filters, the readings become more susceptible to random noise and quick movements. Smaller alpha is more susceptible to noises and larger alpha is more capable of overcoming the drifting issue. But in both cases, the complementary filter solved the drifting issues. Therefore, in the future labs alpha < 0.3 (smaller alpha) is a good design choice .  
+                                         After applying complementary filters, the readings become more susceptible to random noise and quick movements. Smaller alpha 
+                                         is more susceptible to noises and larger alpha is more capable of overcoming the drifting issue. But in both cases, the complementary
+                                         filter solved the drifting issues. Therefore, in the future labs alpha < 0.3 (smaller alpha) is a good design choice .  
                      
                                     </p>
                                           <h5 class="text-left text-secondary mb-0;">Sample Data:</h5>
                                      <p class="text-left text-secondary mb-0;"> 
                                         For the first part, I used the accelerometer and gyroscope complementary filter codes to implement a command that sends the pitch and roll to my computer. 
-According to the Arduino IDE, the maximum memory available for arrays is 393216 bytes when assuming there are no other local variables or overhead. The time values are 4 bytes and floats are 4 bytes 
+According to the Arduino IDE, the maximum memory available for arrays is <strong>393216 bytes</strong> when assuming there are no other local variables or overhead. The time values are 4 bytes and floats are 4 bytes 
                                     therefore for each pair of data 8 bytes are needed. On average, TOF sensors update around every 98 milliseconds
                                     (about 10 values per second) and the IMU sensor sampled every 8 millisecond (about 125 values per second).  Therefore, 
-                                    TOF requires at most 80 bytes per second and IMU requires 1000 bytes per second. On average the data can be stored for (393216/(1000+80))= 364 seconds.<br>
+                                    TOF requires at most 80 bytes per second and IMU requires 1000 bytes per second. On average the data can be stored for (393216/(1000+80))= <strong>364 seconds</strong>.<br><br>
                                      <img src="Lab 4/bluetooth1.png" alt="lpf" style="width:100%"><br><br>
                                     <strong>Python Code:</strong>
                                     <img src="Lab 4/bluetooth2.png" alt="lpf" style="width:100%">
@@ -663,7 +668,9 @@ According to the Arduino IDE, the maximum memory available for arrays is 393216 
                                          </p>
                                       <h5 class="text-left text-secondary mb-0;">Cut the Cord: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
-                                         I used the 3.7 V 850 mAh battery to power the motor and 650 mAh battery to power the digital electronics (Artemis, sensors, etc.) as shown below. This is because the larger mAh means the battery has larger capacity. Because the motor needs to be able to run for a longer period than the electronics devices, we choose 850 mAh battery (larger capacity) for the motor vise versa. 
+                                          I used the <strong>3.7 V 850 mAh </strong>battery to power the motor and <strong>650 mAh </strong>battery to power the digital electronics 
+                                          <em>(Artemis, sensors, etc.)</em> as shown below. This is because the larger mAh means the battery has larger capacity. Because the motor needs 
+                                          to be able to run for a longer period than the electronics devices, we choose 850 mAh battery (larger capacity) for the motor vise versa. 
 <br><br>
                                           <img src="Lab 4/WechatIMG119.jpeg" alt="lpf" style="width:100%"><br>
                                     </p>
