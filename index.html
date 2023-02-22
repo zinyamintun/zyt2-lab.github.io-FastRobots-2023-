@@ -633,9 +633,9 @@
                                           <img src="Lab 4/gyr.png" alt="lpf" style="width:100%"><br><br>
                                          In the video below, I demonstrated the Gyroscope data using Serial Plotter at [-90, 0, 90] position for  Pitch, Roll, and Yaw. <br><br>
                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/mkrCNZBPqtA?controls=1"> </iframe> <br><br>
-                                         From observing the video, we can see that the lines are drifting away while I am trying to hold them in the same position. From this 
+                                         From observing the video, we can see that the lines are drifting away when I am trying to hold them in the same position. From this 
                                          we can conclude that the gyroscope is complementary to the accelerometer because it has low noise but has drifts in the calculations.
-                                         From the equations above, the drift in the gyroscope calculation increases as the <em>sampling rate: dt</em> increases. To compensate for the gyroscope
+                                         From the equations above, the drift in the gyroscope calculation increases as the <strong>sampling rate dt</strong> increases. To compensate for the gyroscope
                                          drifting and accelerometer noises, I implemented a complementary filter using the following equation where the alpha is still 0.4299.<br><br>
                                          <img src="Lab 4/compli_filter.png" alt="compli_filter" style="width:100%"><br><br>
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/4col2BU_6-0?controls=1"> </iframe> <br><br>
