@@ -575,7 +575,7 @@
                                     <hr>-->
                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;"> Tasks: </h3></u>
                                          <h5 class="text-left text-secondary mb-0;"> Set up the IMU: </h5>
-                                        <img src="Lab 4/IMU_connections.png" alt="IMU connection" style="width:100%">
+                                        <img src="Lab 4/WechatIMG118.png" alt="IMU connection" style="width:100%"><br>
                                           <p class="text-left text-secondary mb-0;"> 
                                              In the following video, I tested that the IMU sensor is working by running <strong>SparkFun 
                                               Example1_Basics code</strong>. I demonstrated accelerating and rotating the IMU along the x-y-z axis
@@ -596,7 +596,7 @@
                                               and the gravity. This could be a problem if we are using accelerometer data to determine the orientation in areas where the gravitational acceleration is not constant (e.g. aircraft).<br><br>
                                               I also used the <em>Arduino Serial Plotter</em> to plot the output as shown below.<br><br>
                                               <strong>Acceleration (x-y-z) of Stationary IMU: </strong><br>
-                                              <img src="Lab 4/IMU_accel.png" alt="accel" style="width:100%"><br>
+                                              <img src="Lab 4/WechatIMG101.png" alt="accel" style="width:100%"><br>
                                               As I mentioned above, the acceleration for x and y are zero while z direction is 1000 m/sec^2 due to the 
                                               gravitational acceleration.<br><br>
                                               <strong>Gyroscope (x-y-z) of Stationary IMU: </strong><br>
@@ -607,7 +607,7 @@
                                     <h5 class="text-left text-secondary mb-0;">Accelerometer: </h5>
                                           <p class="text-left text-secondary mb-0;"> 
                                               Using the accelerometer's measured accelerations, pitch and roll can be determined using the following equations.<br>
-                                               <img src="Lab 4/accel_eqn.png.png" alt="accel_eqn" style="width:100%"><br>
+                                               <img src="Lab 4/accel_eqn.png" alt="accel_eqn" style="width:100%"><br>
                                               In the following video, I showed the pitch [blue line] and roll [orange line] at -90, 0, and 90 degrees. I also put a line at -90 [yellow line] and 90 
                                               [green line] to avoid the serial monitor from resizing. From observations, the accelerometer's measurements are accurate 
                                               on average but very noisy especially when the object accelerates.<br>
@@ -640,6 +640,7 @@
                      
                                     </p>
                                           <h5 class="text-left text-secondary mb-0;">Sample Data:</h5>
+                                     <p class="text-left text-secondary mb-0;"> 
                                         For the first part, I used the accelerometer and gyroscope complementary filter codes to implement a command that sends the pitch and roll to my computer. 
 According to the Arduino IDE, the maximum memory available for arrays is 393216 bytes when assuming there are no other local variables or overhead. The time values are 4 bytes and floats are 4 bytes 
                                     therefore for each pair of data 8 bytes are needed. On average, TOF sensors update around every 98 milliseconds
