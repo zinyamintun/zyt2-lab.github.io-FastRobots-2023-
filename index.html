@@ -579,9 +579,9 @@
                                           <p class="text-left text-secondary mb-0;"> 
                                              In the following video, I tested that the IMU sensor is working by running <strong>SparkFun 
                                               Example1_Basics code</strong>. I demonstrated accelerating and rotating the IMU along the x-y-z axis
-                                              and showed that the reading reflects the movement of the IMU. <br>
+                                              and showed that the reading reflects the movement of the IMU. <br><br>
                                                <iframe width="560" height="345" src="https://www.youtube.com/embed/l7Vka_3tvjc?controls=1"> </iframe> 
-                                              <br>
+                                              <br><br>
                                               
                                               <strong>AD0_VAL</strong> is the value of the last bit of the I2C address (similar to TOF). 
                                               While we were working with TOF sensors, I2C addresses were the same for both of the sensors 
@@ -596,46 +596,46 @@
                                               and the gravity. This could be a problem if we are using accelerometer data to determine the orientation in areas where the gravitational acceleration is not constant (e.g. aircraft).<br><br>
                                               I also used the <em>Arduino Serial Plotter</em> to plot the output as shown below.<br><br>
                                               <strong>Acceleration (x-y-z) of Stationary IMU: </strong><br>
-                                              <img src="Lab 4/WechatIMG101.png" alt="accel" style="width:100%"><br>
+                                              <img src="Lab 4/WechatIMG101.png" alt="accel" style="width:100%"><br><br>
                                               As I mentioned above, the acceleration for x and y are zero while z direction is 1000 m/sec^2 due to the 
                                               gravitational acceleration.<br><br>
                                               <strong>Gyroscope (x-y-z) of Stationary IMU: </strong><br>
-                                               <img src="Lab 4/gyr.png" alt="gyr" style="width:100%"><br>
+                                               <img src="Lab 4/gyr.png" alt="gyr" style="width:100%"><br><br>
                                               Due to the serial plotter auto scaling function, it’s hard to see the two plots in the same scale. Therefore, I also plotted acceleration in the Z direction 
                                               for the gyroscope data graph. All the gyroscope data are around 0. We can also see that the acceleration has more noise than the gyroscope because the accelerometer uses vibration to make the measurement therefore it tends to be noisier. 
                                     </p>
                                     <h5 class="text-left text-secondary mb-0;">Accelerometer: </h5>
                                           <p class="text-left text-secondary mb-0;"> 
-                                              Using the accelerometer's measured accelerations, pitch and roll can be determined using the following equations.<br>
-                                               <img src="Lab 4/accel_eqn.png" alt="accel_eqn" style="width:100%"><br>
+                                              Using the accelerometer's measured accelerations, pitch and roll can be determined using the following equations.<br><br>
+                                               <img src="Lab 4/accel_eqn.png" alt="accel_eqn" style="width:100%"><br><br>
                                               In the following video, I showed the pitch [blue line] and roll [orange line] at -90, 0, and 90 degrees. I also put a line at -90 [yellow line] and 90 
                                               [green line] to avoid the serial monitor from resizing. From observations, the accelerometer's measurements are accurate 
-                                              on average but very noisy especially when the object accelerates.<br>
-                                               <iframe width="560" height="345" src="https://www.youtube.com/embed/l7Vka_3tvjc?controls=1"> </iframe> <br>
+                                              on average but very noisy especially when the object accelerates.<br><br>
+                                               <iframe width="560" height="345" src="https://www.youtube.com/embed/l7Vka_3tvjc?controls=1"> </iframe> <br><br>
                                               To analyze the noise due to acceleration, I recorded the data at the rate of 4 millisecond or 250 Hz while tapping the IMU and 
                                               analyzed the noise in the frequency spectrum by doing a <strong>fourier transform</strong> in Python. From observing the Frequency vs. Amplitude graph
                                               for both pitch and roll, there is no obvious spike at any specific frequency as one would expect from tapping. This is due to the built-in internal
-                                              low pass filter in the IMU that is activated by default which filtered out the taps. <br>
-                                               <img src="Lab 4/fft_pitch.png" alt="fft_pitch" style="width:100%"><br>
-                                              <img src="Lab 4/fft_roll.png" alt="fft_roll" style="width:100%"><br>
+                                              low pass filter in the IMU that is activated by default which filtered out the taps. <br><br>
+                                               <img src="Lab 4/fft_pitch.png" alt="fft_pitch" style="width:100%"><br><br>
+                                              <img src="Lab 4/fft_roll.png" alt="fft_roll" style="width:100%"><br><br>
                                               To prepare for the future lab, I implemented a low pass filter starting with a frequency of 30 Hz. This frequency can be tuned later with the actual
                                               frequency of noises on the IMU depending on the speed of the robot. <br><br>
-                                              The equation I used for the low pass filter is as follows:<br>
-                                               <img src="Lab 4/LPF.png" alt="lpf" style="width:100%"><br>
+                                              The equation I used for the low pass filter is as follows:<br><br>
+                                               <img src="Lab 4/LPF.png" alt="lpf" style="width:100%"><br><br>
                                               Using fc as 30 Hz, alpha is calculated to be 0.4299. Similar to the previous video, I demonstrated 
-                                              the accelerometer with LPF output on Serial Plotter and observed that there is less noise. <br>
-                                               <iframe width="560" height="345" src="https://www.youtube.com/embed/_XI3xnrD87w?controls=1"> </iframe> <br>
+                                              the accelerometer with LPF output on Serial Plotter and observed that there is less noise. <br><br>
+                                               <iframe width="560" height="345" src="https://www.youtube.com/embed/_XI3xnrD87w?controls=1"> </iframe> 
                                     </p>
                                     
                                        <h5 class="text-left text-secondary mb-0;">Gyroscope: </h5>
                                      <p class="text-left text-secondary mb-0;"> 
                                            Using the gyroscope,  pitch, roll, and yaw can be determined using the following equations.<br>
-                                          <img src="Lab 4/gyr.png" alt="lpf" style="width:100%"><br>
-                                         In the video below, I demonstrated the Gyroscope data using Serial Plotter at [-90, 0, 90] position for  Pitch, Roll, and Yaw. <br>
-                                         <iframe width="560" height="345" src="https://www.youtube.com/embed/mkrCNZBPqtA?controls=1"> </iframe> <br>
-                                         From observing the video, we can see that the lines are drifting away while I am trying to hold them in the same position. From this we can conclude that the gyroscope is complementary to the accelerometer because it has low noise but has drifts in the calculations. From the equations above, the drift in the gyroscope calculation increases as the sampling rate dt increases. To compensate for the gyroscope drifting and accelerometer noises, I implemented a complementary filter using the following equation where the alpha is still 0.4299.<br>
-                                         <img src="Lab 4/compli_filter.png" alt="compli_filter" style="width:100%"><br>
-                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/4col2BU_6-0?controls=1"> </iframe> <br>
+                                          <img src="Lab 4/gyr.png" alt="lpf" style="width:100%"><br><br>
+                                         In the video below, I demonstrated the Gyroscope data using Serial Plotter at [-90, 0, 90] position for  Pitch, Roll, and Yaw. <br><br>
+                                         <iframe width="560" height="345" src="https://www.youtube.com/embed/mkrCNZBPqtA?controls=1"> </iframe> <br><br>
+                                         From observing the video, we can see that the lines are drifting away while I am trying to hold them in the same position. From this we can conclude that the gyroscope is complementary to the accelerometer because it has low noise but has drifts in the calculations. From the equations above, the drift in the gyroscope calculation increases as the sampling rate dt increases. To compensate for the gyroscope drifting and accelerometer noises, I implemented a complementary filter using the following equation where the alpha is still 0.4299.<br><br>
+                                         <img src="Lab 4/compli_filter.png" alt="compli_filter" style="width:100%"><br><br>
+                                          <iframe width="560" height="345" src="https://www.youtube.com/embed/4col2BU_6-0?controls=1"> </iframe> <br><br>
                                          After applying complementary filters, the readings become more susceptible to random noise and quick movements. Smaller alpha is more susceptible to noises and larger alpha is more capable of overcoming the drifting issue. But in both cases, the complementary filter solved the drifting issues. Therefore, in the future labs alpha < 0.3 (smaller alpha) is a good design choice .  
                      
                                     </p>
@@ -646,17 +646,17 @@ According to the Arduino IDE, the maximum memory available for arrays is 393216 
                                     therefore for each pair of data 8 bytes are needed. On average, TOF sensors update around every 98 milliseconds
                                     (about 10 values per second) and the IMU sensor sampled every 8 millisecond (about 125 values per second).  Therefore, 
                                     TOF requires at most 80 bytes per second and IMU requires 1000 bytes per second. On average the data can be stored for (393216/(1000+80))= 364 seconds.<br>
-                                     <img src="Lab 4/bluetooth1.png" alt="lpf" style="width:100%"><br>
+                                     <img src="Lab 4/bluetooth1.png" alt="lpf" style="width:100%"><br><br>
                                     <strong>Python Code:</strong>
                                     <img src="Lab 4/bluetooth2.png" alt="lpf" style="width:100%">
-                                    <br>
+                                    <br><br>
                                     For the second part, I integrated with the TOF code from the previous lab to collect data on both the TOF and IMU and
                                     send it through bluetooth. If one big array is used to collect the data from the Artemis, we need to implement more processing
                                     code on the Python side. But using the data in the separate array means TOF and IMU data will be asynchronous since they have different updating time.
                                     For this lab, I used one big array to collect the data because (1) for our robot we might need synchronous TOF and IMU data to 
                                     specify the robot’s orientation and location at a certain time and (2) to prevent unnecessary implementation errors from writing
-                                    processing code on the Python. <br>
-                                    <img src="Lab 4/rapid_tof.png" alt="lpf" style="width:100%"><br>
+                                    processing code on the Python. <br><br>
+                                    <img src="Lab 4/rapid_tof.png" alt="lpf" style="width:100%"><br><br>
                                     <img src="Lab 4/rapid_imu.png" alt="lpf" style="width:100%"><br>
 
 
@@ -664,7 +664,7 @@ According to the Arduino IDE, the maximum memory available for arrays is 393216 
                                       <h5 class="text-left text-secondary mb-0;">Cut the Cord: </h5>
                                       <p class="text-left text-secondary mb-0;"> 
                                          I used the 3.7 V 850 mAh battery to power the motor and 650 mAh battery to power the digital electronics (Artemis, sensors, etc.) as shown below. This is because the larger mAh means the battery has larger capacity. Because the motor needs to be able to run for a longer period than the electronics devices, we choose 850 mAh battery (larger capacity) for the motor vise versa. 
-<br>
+<br><br>
                                           <img src="Lab 4/WechatIMG119.jpeg" alt="lpf" style="width:100%"><br>
                                     </p>
                                      <h5 class="text-left text-secondary mb-0;">Record the Stunt: </h5>
@@ -673,14 +673,14 @@ According to the Arduino IDE, the maximum memory available for arrays is 393216 
                                           very sensitive and hard to control, (2) sudden change in direction while it’s driving at high speed causes it to flip, (3) 
                                           rotating at constant speed makes the car rotate at the same place. <br><br>
                                           <strong>Driving RC car without Artemis: </strong><br>
-                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/i6M-04seruE?controls=1"> </iframe> <br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/i6M-04seruE?controls=1"> </iframe> <br><br>
                                           In the following video, I connect the Artemis to the car as shown below and send the data over to my 
-                                          computer. Finally, I plotted the TOF and IMU data vs. time in two separate graphs on the python. <br>
+                                          computer. Finally, I plotted the TOF and IMU data vs. time in two separate graphs on the python. <br><br>
                                           <strong>RC car setup:</strong>
                                           <img src="Lab 4/car_setup-1.jpg" alt="lpf" style="width:100%"><br><br>
                                           <strong>Driving RC car with Artemis: </strong>
-                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/8t40X-zwQN4?controls=1"> </iframe> <br>
-                                          <img src="Lab 4/car_dist.png" alt="lpf" style="width:100%"><br>
+                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/8t40X-zwQN4?controls=1"> </iframe> <br><br>
+                                          <img src="Lab 4/car_dist.png" alt="lpf" style="width:100%"><br><br>
                                           <img src="Lab 4/car_imu.png" alt="lpf" style="width:100%"><br>
 
                                     </p>
