@@ -718,10 +718,133 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="LAB 5"/>
+                                    <!-- Portfolio Modal - Image<img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="LAB 2"/>-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                     <!-- Lab Description-->
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                      In this lab, we disassembled the car and removed the control PCB, then we assembled 
+                                        all the components into the car chassis. The purpose of this lab was to run the car with 
+                                        an open loop control where we execute a pre-programmed series of moves, using the Artemis board 
+                                        and two dual motor drivers. </p>
+                                    <hr>
+                                    <!-- Part List
+                                     <p class="text-left text-secondary mb-0;"> Parts Required: </strong> 
+                                    <ul style="text-left text-secondary mb-0;">
+                                    <li> 1 x SparkFun Red Board Artemis Nano</li>
+                                    <li> 1 x USB C to C cable</li>
+                                    </ul>
+                                    </p>
+                                    <hr>-->
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;"> Prelab:</h3></u>
+                                         <h5 class="text-left text-secondary mb-0;">Connection between the Motor Drivers, Artemis, and Battery:</h5>
+                                          <p class="text-left text-secondary mb-0;"> 
+                                            In this class, we are using the <strong>DRV8833 Dual Motor Driver Carrier</strong> to drive the motors. 
+                                              The DRV8833 chip has a limited amount of current to deliver to each motor which is not 
+                                              enough supply current for our robots to be able to drive fast. Therefore, we use two DRV8833 
+                                              to drive the two motors separately to double the supply current. To do so, we connected BIN1 to 
+                                              AIN1, BIN2 to AIN2, BOUT1 to AOUT1, and BOUT2 to AOUT2 where the rest of the connections remained 
+                                              the same. Rather than connecting one chip to four PWM pins and two motors, now we have one chip 
+                                              connected to only two PWM pins and one motor. Since each motor controls the two wheels on one side 
+                                              of the car, each chip will be controlling either left or right wheels. I chose <strong>PWM 6 and 7 </strong>to control 
+                                              the left motor driver and <strong>PWM 11 and 12</strong> to control the right motor driver. <br><br>
+                                              <img src="Lab 5/Prelab_diagram.png" alt="prelab_diagram" style="width:100%">
+                                    </p>
+                                    <h5 class="text-left text-secondary mb-0;">Battery Discussion: :</h5>
+                                          <p class="text-left text-secondary mb-0;"> 
+                                             We have one 3.7 V 850 mAh battery and two 3.7 V 650 mAh batteries in this lab. In the previous lab, we connected 
+                                              3.7 V 650 mAh to power the digital electronics (Artemis, sensors, etc). In this lab, I use the 3.7 850 mAh 
+                                              battery to power the motor. This is because the motors draw more current from the battery than the digital 
+                                              lectronics. Therefore, we supply the battery with higher energy capacity (850 mAh) to the motor and the one with 
+                                              lower energy capacity (650 mAh) to the digital electronics.
+                                             </p>
+                                    <hr>
+                                  <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                        <h5 class="text-left text-secondary mb-0;">Setup with power supply and oscilloscope hookup: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            Before soldering the motor driver chips to the motors, I used the oscilloscope and bench power 
+                                            supply to test them as shown below. I set the external power supply voltage to be <strong>3 V </strong>to power the motor
+                                            driver because the motor driver chip is compatible with the 3V and 5V.<br><br>
+                                            To set up, I connected the yellow alligator clip from the external power supply 
+                                            and black alligator clip from the oscilloscope to the black wire that is soldered 
+                                            to the GND of the motor driver. Then I connected the red alligator clip from the external 
+                                            power supply to the red wire that is soldered to the VIN of the motor driver. Finally, I 
+                                            connected the oscilloscope’s probe tip to the one of the wires that is connected “OUT”
+                                            sides of the motor drivers. I forgot to take a picture of the set up. But I have attached 
+                                            the code and Oscilloscope output below.
+                                        </p>
+                                          
+                                       <h6 class="text-left text-secondary mb-0;">Arduino code:  </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                      After setting up the power supply and oscilloscope, I used <strong>analogWrite()</strong> to define a PWM signal. 
+                                            According to the <em>Arduino PWM output documentation</em>, for an unsigned 8 bit integer PWM_out_level 
+                                            ranges from 0 to 255. I tested the motor driver with the PWM_out_level=100 which is around
+                                            100/255= <strong>39.21% duty cycle</strong>.   <br><br>
+                                            <img src="Lab 5/oscilloscope_code.png" alt="oscilloscope test code" style="width:100%">
+                                        </p>
+                                     <h6 class="text-left text-secondary mb-0;">Oscilloscope output: </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            <img src="Lab 5/oscilloscope_output.jpg" alt="oscilloscope output" style="width:100%"><br><br>
+                                            The voltage oscillated in the proper range as shown in the oscilloscope monitor. Then I changed 
+                                            the power supply to 3.7 V to imitate the battery voltage and PWM_out_level=200 (which is 200/255= 
+                                            <strong>78.4% duty cycle </strong>). The current drawn by the motor on the power supply was  <strong>0.385 A  </strong>as shown in the picture
+                                            below.   <br><br>
+                                            <img src="Lab 5/current.jpeg" alt="power supply current output" style="width:100%"><br><br>
+                                            The current required to drive one motor per driver is 0.385 A (= 385mA) and we are using the 850 mAh battery
+                                            to drive both motors. Therefore, a fully charged battery should ideally be able to last about 850 mAh/(2 x 385 mA)= 
+                                            <strong>1.1 hour </strong>to drive the motor at 78.4% duty cycle (which is pretty fast). 
+                                        </p>
+                                       <h5 class="text-left text-secondary mb-0;">Running One Wheel: </h5>
+                                    <p class="text-left text-secondary mb-0;"> 
+                                            <iframe width="560" height="345" src="https://www.youtube.com/embed/dwM8GSE-jgg?controls=1"> </iframe>  
+                                         </p>
+                                        <h5 class="text-left text-secondary mb-0;">Running Both Wheel: </h5>
+                                     <p class="text-left text-secondary mb-0;"> 
+                                            <iframe width="560" height="345" src="https://www.youtube.com/embed/WnBH4Bw-5nw?controls=1"> </iframe>  
+                                    </p>
+                                      
+                                            <h5 class="text-left text-secondary mb-0;">Lower Limit PWM Value: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            To drive the car, we use the <strong>analogWrite()</strong> to send the PWM signal from the Artemis to the motor driver which 
+                                            ranges from 0 to 255. If we want to increase the motor speed, we increase the PWM_out_level value. However, 
+                                            the motor speed is not linear to the PWM input. For example, to start a car from rest would require more power 
+                                            compared to the car that is running. Therefore, I explore the lower limit PWM value for which the motors are able 
+                                            to start moving forward from the rest.  <br><br>
+                                            To test this, I started with the lower limit of <strong>25 </strong>and slowly increased the PWM_out_level value. As you can see in the video below,
+                                            the car started to move at the lower limit value of <strong>45 </strong>and anything below that the motors only made a struggling sound. <br><br>
+                                             <iframe width="345" height="560" src="https://www.youtube.com/embed/qKiT-IXQfDg?controls=1"> </iframe>  <br><br>
+                                            Similarly, I have also explored the lower limit for PWM input that would rotate the car on the ground 
+                                            from rest in the same way. Since it takes more power for the car to start rotating than to start running forward, 
+                                            I started with a higher PWM value than before. I found that the lower limit value for the car to start rotating from 
+                                            the rest is <strong>100</strong> as shown in the video below.<br><br>
+                                            <iframe width="345" height="560" src="https://www.youtube.com/embed/vxu7Q8qsSv8?controls=1"> </iframe>  <br><br>
+                                    </p>
+                                    <h5 class="text-left text-secondary mb-0;">Going In a Straight Line: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            When I set the PWM_out_level to <strong>50</strong>, we can see that the car drives in a straight line
+                                            without deviating the center.<br><br>
+                                             <iframe width="345" height="560" src="https://www.youtube.com/embed/RQwD9vqvrN4?controls=1"> </iframe>  <br><br>
+                                            When I increased the PWM_out_level to <strong>80</strong>, we can see that the car started to move toward its left. <br><br>
+                                             <iframe width="345" height="560" src="https://www.youtube.com/embed/aMo8IawX6NA?controls=1"> </iframe>  <br><br>
+                                            Since the car was moving toward the left, the right motor was stronger than the left and calibration was needed.
+                                            To find the calibration factor, I slowly increased the PWM_out_level until the car could drive straight 
+                                            without deviating from the line. In the following video, I demonstrated that the car is driving in the straight
+                                            line and the PWM_out_level was 85 for the left and 80 for the right motor, which gives the <strong>calibration factor </strong>
+                                            is about <strong>85/80= 1.0625</strong>.
+                                            <iframe width="345" height="560" src="https://www.youtube.com/embed/uPki_e3qsZA?controls=1"> </iframe>  <br><br>
+                                            
+                                    </p>
+                                    <h5 class="text-left text-secondary mb-0;">Open-Loop Control: </h5>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            Below is the code and video of the car running the open loop control.  <br><br>
+                                             <iframe width="345" height="560" src="https://www.youtube.com/embed/mRzkl2NB5gg?controls=1"> </iframe> 
+                                    </p>
+                                      <h6 class="text-left text-secondary mb-0;">Arduino code:  </h6>
+                                        <p class="text-left text-secondary mb-0;"> 
+                                            <img src="Lab 5/olc_code.png" alt="open loop control code" style="width:100%">
+                                        </p>   
+                                    <hr>
+                                            <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
                         </div>
