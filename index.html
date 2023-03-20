@@ -875,7 +875,6 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Text--> <!-- Lab Description-->
-                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
                                     <p class="text-left text-secondary mb-0;">
                                       In this lab, we programmed the robot to perform a stunt using closed loop control. The purpose of this 
@@ -912,6 +911,131 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          <h6 class="text-left text-secondary mb-0;">Logic Flowchart:</h6>
                                              <img src="Lab 6/Flowchart.png" alt="Flowchart.png" style="width:100%"><br><br>
                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                             <p class="text-left text-secondary mb-0;"> 
+                                             <pre>
+                                             <code>
+                                             void handle_command()
+{   
+    // Set the command string from the characteristic value
+    robot_cmd.set_cmd_string(rx_characteristic_string.value(),
+                             rx_characteristic_string.valueLength());
+
+    bool success;
+    int cmd_type = -1;
+    success = robot_cmd.get_command_type(cmd_type);
+
+    // Check if the last tokenization was successful and return if failed
+    if (!success) {
+        return;
+    }
+
+    // Handle the command type accordingly
+    switch (cmd_type) {
+
+        /*
+         * Call send_data function and send the data through bluetooth
+         */
+        case getData:
+          int idx; 
+          success= robot_cmd.get_next_value(idx);
+          if (!success)
+          return;
+          send_data(idx);
+        break;
+
+        /*
+         * Setting Code Running Flag to 1
+         */
+        case startTask:    
+         CR=1; 
+        break;
+
+        /*
+         * Stop everything
+         */
+        case stopTask:
+          CR=0; 
+          SR=0;
+          robot.slowStop(); 
+          tx_int_size.setValue(size_val);         
+        break;
+
+        case startRecord:
+          SR=1;
+        break;
+
+        default:
+            Serial.print("Invalid Command Type: ");
+            Serial.println(cmd_type);
+            break;
+    }
+}
+
+//Functions to RECORD DATA
+
+/*
+* Taking Measurements with RHS TOF Sensor
+*/
+void front_tof(){
+    distanceSensor1.startRanging();  
+  if (distanceSensor1.checkForDataReady()){
+    dist2= distanceSensor1.getDistance();
+    distanceSensor1.clearInterrupt();
+    distanceSensor1.stopRanging();
+  }
+}
+
+/*
+* Taking Measurements with RHS TOF Sensor
+*/
+void side_tof(){
+    distanceSensor2.startRanging();
+  if (distanceSensor2.checkForDataReady()){
+    dist1= distanceSensor2.getDistance();
+    distanceSensor2.clearInterrupt();
+    distanceSensor2.stopRanging();
+  }
+}
+
+//Function to STORE DATA
+
+/*
+* Storing data in an array
+*/
+void store_data(){
+  current_time = millis();
+  time_stamp= current_time-start_time;
+  
+  //Sample the data every 0.5 second 
+  if(current_time-prev_time>500 && dist2!=0){
+    front_dist_arr[count] =  dist2;
+    side_dist_arr[count]  = dist1;
+    time_arr[count] = time_stamp;
+    speed_arr[count] = Output; 
+  if (count < MAX_ARR_SIZE){
+    count+=1;
+  }
+  else{
+    count=0;
+  }
+  if (size_val != MAX_ARR_SIZE){
+    size_val+=1;
+  }
+  prev_time= current_time;
+}
+}
+
+//Function to SEND
+
+void send_data(int idx){
+  tx_float_time.writeValue(time_arr[idx]);
+  tx_int_fdist.writeValue(front_dist_arr[idx]);
+  tx_int_sdist.writeValue(side_dist_arr[idx]);
+  tx_int_speed.writeValue(speed_arr[idx]);
+}
+</code>
+</pre>
+</p>
                                           
                                    
                                  <hr>
