@@ -911,66 +911,69 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          <h6 class="text-left text-secondary mb-0;">Logic Flowchart:</h6>
                                              <img src="Lab 6/Flowchart.png" alt="Flowchart.png" style="width:100%"><br><br>
                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
-                                                 <pre style="display: flex; justify-content: left;">
-                                                 <code>
-enum CommandTypes
-{   getData,
-    startTask,
-    stopTask,
-    startRecord,
-};
+                                                 <pre id="mypre" 
+                                                    style="background: darkslategray; color: #fff;
+                                                    width:350px; padding:20px; font-size: 16px; 
+                                                    display: block; justify-content: center;">
+                                                    <code>
+                                        enum CommandTypes
+                                        {   getData,
+                                            startTask,
+                                            stopTask,
+                                            startRecord,
+                                        };
 
-//Functions//
+                                        //Functions//
 
-/*
-* Taking Measurements with RHS TOF Sensor
-*/
-void front_tof(){
-    distanceSensor1.startRanging();  
-  if (distanceSensor1.checkForDataReady()){
-    dist2= distanceSensor1.getDistance();
-    distanceSensor1.clearInterrupt();
-    distanceSensor1.stopRanging();
-  }
-}
+                                        /*
+                                        * Taking Measurements with RHS TOF Sensor
+                                        */
+                                        void front_tof(){
+                                            distanceSensor1.startRanging();  
+                                          if (distanceSensor1.checkForDataReady()){
+                                            dist2= distanceSensor1.getDistance();
+                                            distanceSensor1.clearInterrupt();
+                                            distanceSensor1.stopRanging();
+                                          }
+                                        }
 
-/*
-* Storing data in an array
-*/
-void store_data(){
-  current_time = millis();
-  time_stamp= current_time-start_time;
-  
-  //Sample the data every 0.5 second 
-  if(current_time-prev_time>500 && dist2!=0){
-    front_dist_arr[count] =  dist2;
-    side_dist_arr[count]  = dist1;
-    time_arr[count] = time_stamp;
-    speed_arr[count] = Output; 
-  if (count < MAX_ARR_SIZE){
-    count+=1;
-  }
-  else{
-    count=0;
-  }
-  if (size_val != MAX_ARR_SIZE){
-    size_val+=1;
-  }
-  prev_time= current_time;
-}
-}
+                                        /*
+                                        * Storing data in an array
+                                        */
+                                        void store_data(){
+                                          current_time = millis();
+                                          time_stamp= current_time-start_time;
 
-/*
-* Sending data from the array
-*/
-void send_data(int idx){
-  tx_float_time.writeValue(time_arr[idx]);
-  tx_int_fdist.writeValue(front_dist_arr[idx]);
-  tx_int_sdist.writeValue(side_dist_arr[idx]);
-  tx_int_speed.writeValue(speed_arr[idx]);
-}
-</code>
-</pre>
+                                          //Sample the data every 0.5 second 
+                                          if(current_time-prev_time>500 && dist2!=0){
+                                            front_dist_arr[count] =  dist2;
+                                            side_dist_arr[count]  = dist1;
+                                            time_arr[count] = time_stamp;
+                                            speed_arr[count] = Output; 
+                                          if (count < MAX_ARR_SIZE){
+                                            count+=1;
+                                          }
+                                          else{
+                                            count=0;
+                                          }
+                                          if (size_val != MAX_ARR_SIZE){
+                                            size_val+=1;
+                                          }
+                                          prev_time= current_time;
+                                        }
+                                        }
+
+                                        /*
+                                        * Sending data from the array
+                                        */
+                                        void send_data(int idx){
+                                          tx_float_time.writeValue(time_arr[idx]);
+                                          tx_int_fdist.writeValue(front_dist_arr[idx]);
+                                          tx_int_sdist.writeValue(side_dist_arr[idx]);
+                                          tx_int_speed.writeValue(speed_arr[idx]);
+                                        }
+                                        </code>
+                                        </pre>
 
                                  <hr>
                                   <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
