@@ -892,25 +892,27 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          data from the robot to our laptop.<br><br>
                                          On the laptop side (using Jupyter Notebook), I implemented codes to connect and send different commands 
                                          to the Artemis. On the Artemis (using Arduino), I implemented the command handler to perform the commands
-                                         sent by the laptop through a switch-case construct. <br><br>
+                                         sent by the laptop through a switch-case construct. </p>
                                          <h5 class="text-left text-secondary mb-0;">Laptop to Robot <handle_command()>: </h5>
+                                             <p class="text-left text-secondary mb-0;"> 
                                              <strong>getData</strong>: Send the data in the array back to the Laptop<br>
                                              <strong>startTask</strong>: Set the CR=1; start the front TOF sensor and PID controller<br>
                                              <strong>stopTask</strong>: Set the CR=0; stop the front TOF sensor and PID controller<br>
-                                             <strong>startRecord</strong>: Started storing the TOF sensor data, PWM value, and time stamp in corresponding array for every 500 ms (=0.5 sec) <br><br>
+                                             <strong>startRecord</strong>: Started storing the TOF sensor data, PWM value, and time stamp in corresponding array for every 500 ms (=0.5 sec) </p>
+                                             <p class="text-left text-secondary mb-0;"> 
                                              <u>Additional Notes:</u><br>
                                              I created the <strong>startTask</strong> and <strong>startRecord</strong> as separate commands because we will usually only need to receive the information 
                                              from a portion of time when the robot is performing the task. Therefore, setting the array size to about 500 should be sufficient 
                                              enough to store data for that portion of the time. <br><br>
                                              Since I am doing Task A, I focused on sending the data of only the front TOF sensor. Because the sampling rate of the TOF sensor is really fast,
                                              it would be too slow to send all the data at the same rate. Therefore, I stored the data in the Artemis
-                                             using a separate function for every 500 ms (=0.5 sec), and sent the data when it’s needed. <br><br>
+                                             using a separate function for every 500 ms (=0.5 sec), and sent the data when it’s needed. </p>
                 
-                                         <h5 class="text-left text-secondary mb-0;">Logic Flowchart:</h5>
+                                         <h6 class="text-left text-secondary mb-0;">Logic Flowchart:</h6>
                                              <img src="Lab 6/Flowchart.png" alt="Flowchart.png" style="width:100%"><br>
-                                         <h5 class="text-left text-secondary mb-0;">Arduino Code:</h5>
+                                         <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                           
-                                    </p>
+                                   
                                  <hr>
                                   <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
                                       <p class="text-left text-secondary mb-0;"> 
@@ -918,27 +920,30 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           distance sensor reading and target distance using <strong><error=sensor distance- target distance></strong> 
                                           where the target distance is set to 300 mm. Then I multiplied the error with proportional gain which I found by testing various
                                           values to find the PWM value. If the error was a positive number, meaning the sensor distance reading was larger than target distance, 
-                                          then the PWM value will be positive and the robot will drive closer to the wall and vice versa.<br>
-                                    <h5 class="text-left text-secondary mb-0;">Arduino Code:</h5>
+                                          then the PWM value will be positive and the robot will drive closer to the wall and vice versa.</p>
+                                    <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                      
                                     <h4 class="text-left text-secondary mb-0;">Limiting Range: </h4>
+                                             <p class="text-left text-secondary mb-0;"> 
                                           I also implemented the following code to make sure that the calculated PWM value doesn’t 
                                           ]exceed the lower limit and upper limit. The PWM signal for <strong>analogWrite()</strong> ranges from 0 to 255 
                                           therefore I set the upper limit as 255. So when the calculated PWM value exceeds 255, I set it equal to <strong>255</strong>. 
                                           To choose the lower limit, I used the PWM value I got from the previous lab which is the minimum PWM value for 
                                           the car to start moving (=45) instead of only making a struggling sound. So when the calculated PWM value gets lower than 45,
-                                          I set it equals to <strong>45</strong>. <br>
-                                          <h5 class="text-left text-secondary mb-0;">Arduino Code:</h5>
+                                                 I set it equals to <strong>45</strong>. </p>
+                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                           
                                    <h4 class="text-left text-secondary mb-0;">Proportional Controller:</h4>
+                                              <p class="text-left text-secondary mb-0;"> 
                                           Since I am only using a proportional controller, it’s most likely that the car will overshoot the desired distance and bump into the wall. 
                                           To avoid that, I started with a small value of Kp (1) to decrease the overshoot, (2) to give the sensor more time to read. 
                                           Because I am testing the car at about 1500 mm away from the wall, Kp=0.07 gives the PWM value about 84 (PWM value= 0.07*(1500-300)= 84) 
                                           which seems reasonable to start. Using this logic, I started testing the Kp from the range between 0.03 to 0.1 and saw that for Kp below 
-                                          0.07 the car moves really slow and for Kp above 0.07 the car overshoots and bumps into the wall. <br>
-                                          <h5 class="text-left text-secondary mb-0;">Arduino Code:</h5>
+                                          0.07 the car moves really slow and for Kp above 0.07 the car overshoots and bumps into the wall. </p>
+                                           <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                           
-                                          <h5 class="text-left text-secondary mb-0;">Video Demonstration:</h5>
+                                          <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
+                                              <p class="text-left text-secondary mb-0;"> 
                                           The following video demonstrates the proportional controller using <strong>Kp= 0.07</strong>. We can see that the car overshot the 
                                           distance but didn’t bump into the wall. But we can also see that it takes a while for the car to settle at the 300 mm distance.<br>
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/jioI5LYPfOs?controls=1"> </iframe>  <br>
@@ -948,6 +953,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           <img src="Lab 6/P_control_plot.png" alt="P_control_plot.png" style="width:100%"><br>
                                           
                                   <h4 class="text-left text-secondary mb-0;">Proportional Plus Derivative Controller</h4>
+                                              <p class="text-left text-secondary mb-0;"> 
                                           Although the Proportional controller works well for Task A, we see that there are still some downsides to it. By adding the derivative term 
                                           equation, the system reaches the steady state faster and improves the performance of our controller.  <br><br>
                                           For example, if at time A we are at 1500 mm and time B we are at 1000 mm, the corresponding errors would be 1200 and 700 which 
@@ -958,10 +964,11 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           (I used Kd =0.08 from trial and error) to get the PWM value due to the derivative term. Finally, to get the total PWM value, we added the two
                                           PWM values from proportional and derivative term which in this case would be (49- (35*0.08)=) 46.2. As we can see in this example, 
                                           the derivative term helps tuning the PWM values by taking into account how the system is changing. <br>
-
-                                          <h5 class="text-left text-secondary mb-0;">Arduino Code:</h5>
+                                             </p>
+                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                           
-                                          <h5 class="text-left text-secondary mb-0;">Video Demonstration:</h5>
+                                          <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
+                                              <p class="text-left text-secondary mb-0;"> 
                                           The following video demostrates the proportional controller using Kp= 0.07 and Kd=0.08. We can see that the car overshot less 
                                           than before and reached the target distance faster.<br>
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/GcXjqu0sQIM?controls=1"> </iframe>  <br>
