@@ -900,7 +900,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                              <strong>stopTask</strong>: Set the CR=0; stop the front TOF sensor and PID controller<br>
                                              <strong>startRecord</strong>: Started storing the TOF sensor data, PWM value, and time stamp in corresponding array for every 500 ms (=0.5 sec) </p>
                                              <p class="text-left text-secondary mb-0;"> 
-                                             <u>Additional Notes:</u><br>
+                                              <strong><u>Additional Notes:</u></strong><br>
                                              I created the <strong>startTask</strong> and <strong>startRecord</strong> as separate commands because we will usually only need to receive the information 
                                              from a portion of time when the robot is performing the task. Therefore, setting the array size to about 500 should be sufficient 
                                              enough to store data for that portion of the time. <br><br>
