@@ -912,64 +912,60 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                              <img src="Lab 6/Flowchart.png" alt="Flowchart.png" style="width:100%"><br><br>
                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                              <p class="text-left text-secondary mb-0;"> 
-                                                 <pre>
-                                             <code>
-                                                 void handle_command()
-    {   
-        // Set the command string from the characteristic value
-        robot_cmd.set_cmd_string(rx_characteristic_string.value(),
-                                 rx_characteristic_string.valueLength());
+                                             <pre>
+                                                <code>
+                                                void handle_command(){   
+                                                // Set the command string from the characteristic value
+                                                robot_cmd.set_cmd_string(rx_characteristic_string.value(),
+                                                rx_characteristic_string.valueLength());
 
-        bool success;
-        int cmd_type = -1;
-        success = robot_cmd.get_command_type(cmd_type);
+                                                bool success;
+                                                int cmd_type = -1;
+                                                success = robot_cmd.get_command_type(cmd_type);
 
-        // Check if the last tokenization was successful and return if failed
-        if (!success) {
-            return;
-        }
+                                                // Check if the last tokenization was successful and return if failed
+                                                if (!success) {return;}
 
-        // Handle the command type accordingly
-        switch (cmd_type) {
+                                                // Handle the command type accordingly
+                                                switch (cmd_type) {
 
-            /*
-             * Call send_data function and send the data through bluetooth
-             */
-            case getData:
-              int idx; 
-              success= robot_cmd.get_next_value(idx);
-              if (!success)
-              return;
-              send_data(idx);
-            break;
+                                                /*
+                                                 * Call send_data function and send the data through bluetooth
+                                                 */
+                                                case getData:
+                                                    int idx; 
+                                                    success= robot_cmd.get_next_value(idx);
+                                                    if (!success){return;}
+                                                send_data(idx);
+                                                break;
 
-            /*
-             * Setting Code Running Flag to 1
-             */
-            case startTask:    
-             CR=1; 
-            break;
+                                                /*
+                                                * Setting Code Running Flag to 1
+                                                */
+                                                case startTask:    
+                                                    CR=1; 
+                                                break;
 
-            /*
-             * Stop everything
-             */
-            case stopTask:
-              CR=0; 
-              SR=0;
-              robot.slowStop(); 
-              tx_int_size.setValue(size_val);         
-            break;
+                                                /*
+                                                 * Stop everything
+                                                 */
+                                                 case stopTask:
+                                                    CR=0; 
+                                                    SR=0;
+                                                    robot.slowStop(); 
+                                                    tx_int_size.setValue(size_val);         
+                                                break;
 
-            case startRecord:
-              SR=1;
-            break;
+                                                case startRecord:
+                                                    SR=1;
+                                                break;
 
-            default:
-                Serial.print("Invalid Command Type: ");
-                Serial.println(cmd_type);
-                break;
-        }
-    }
+                                                default:
+                                                Serial.print("Invalid Command Type: ");
+                                                Serial.println(cmd_type);
+                                                break;
+                                             }
+                                            }
 
     //Functions to RECORD DATA
 
