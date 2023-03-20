@@ -984,6 +984,33 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           values to find the PWM value. If the error was a positive number, meaning the sensor distance reading was larger than target distance, 
                                           then the PWM value will be positive and the robot will drive closer to the wall and vice versa.</p>
                                     <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                    <pre id="mypre"
+                                        style="background: darkslategray; color: white;
+                                               width:100%; padding:20px; font-size: 16px;
+                                               white-space: pre-line; text-align:left">
+                                               <code> 
+                                               //Computing the PWM value using proportional control
+                                               void p_pid(){
+                                                  double error= dist2-300;
+                                                  Output= kp*e;  
+                                                  drive(Output);
+                                                  }
+                                                }
+
+                                               void drive(double Output){
+                                                  if (Output>0){
+                                                    moveForward(limit_range(Output));
+                                                  }
+                                                  else if (Output<0){
+                                                    moveBackward(limit_range(Output));
+                                                  }
+                                                  else{
+                                                    slowStop();
+                                                  }
+                                                }
+                                                </code>
+                                                </pre>
+                                                
                                      
                                     <h4 class="text-left text-secondary mb-0;">Limiting Range: </h4>
                                              <p class="text-left text-secondary mb-0;"> 
@@ -994,6 +1021,26 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           the car to start moving (=45) instead of only making a struggling sound. So when the calculated PWM value gets lower than 45,
                                                  I set it equals to <strong>45</strong>. </p>
                                           <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                          
+                                    <pre id="mypre"
+                                        style="background: darkslategray; color: white;
+                                               width:100%; padding:20px; font-size: 16px;
+                                               white-space: pre-line; text-align:left">
+                                               <code> 
+                                               //Computing the PWM value using proportional control
+                                              int limit_range(double Output){
+                                                if (Output>=255){
+                                                  return 255;
+                                                }
+                                                else if (Output<45){
+                                                  return 45;
+                                                }
+                                                else{
+                                                  return Output;
+                                                }
+                                              }
+                                                </code>
+                                                </pre>
                                           
                                    <h4 class="text-left text-secondary mb-0;">Proportional Controller:</h4>
                                               <p class="text-left text-secondary mb-0;"> 
@@ -1028,7 +1075,21 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           the derivative term helps tuning the PWM values by taking into account how the system is changing. <br>
                                              </p>
                                           <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
-                                          
+                                         <pre id="mypre"
+                                        style="background: darkslategray; color: white;
+                                               width:100%; padding:20px; font-size: 16px;
+                                               white-space: pre-line; text-align:left">
+                                               <code> 
+                                               //Computing the PWM value using proportional plus derivative control
+                                          void pd_pid(){
+                                              double error= dist2-SetPoint;
+                                              double derror= error- prev_error;
+                                              Output = kp* error + kd*derror;
+                                              drive(Output);
+                                              pre_error=e;
+                                            }
+                                            </code>
+                                            </pre>
                                           <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
                                               <p class="text-left text-secondary mb-0;"> 
                                           The following video demostrates the proportional controller using Kp= 0.07 and Kd=0.08. We can see that the car overshot less 
