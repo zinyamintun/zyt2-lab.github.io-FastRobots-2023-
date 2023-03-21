@@ -1011,43 +1011,13 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           distance sensor reading and target distance using <strong><error=sensor distance- target distance></strong> 
                                           where the target distance is set to 300 mm. Then I multiplied the error with proportional gain which I found by testing various
                                           values to find the PWM value. If the error was a positive number, meaning the sensor distance reading was larger than target distance, 
-                                          then the PWM value will be positive and the robot will drive closer to the wall and vice versa.</p>
-                                   
-                                    <h4 class="text-left text-secondary mb-0;">Limiting Range: </h4>
-                                             <p class="text-left text-secondary mb-0;"> 
-                                          I also implemented the following code to make sure that the calculated PWM value doesn’t 
-                                          ]exceed the lower limit and upper limit. The PWM signal for <strong>analogWrite()</strong> ranges from 0 to 255 
-                                          therefore I set the upper limit as 255. So when the calculated PWM value exceeds 255, I set it equal to <strong>255</strong>. 
-                                          To choose the lower limit, I used the PWM value I got from the previous lab which is the minimum PWM value for 
-                                          the car to start moving (=45) instead of only making a struggling sound. So when the calculated PWM value gets lower than 45, I set it equals to <strong>45</strong>. <br><br>
+                                          then the PWM value will be positive and the robot will drive closer to the wall and vice versa. <br><br>
                                           Since I am only using a proportional controller, it’s most likely that the car will overshoot the desired distance and bump into the wall. 
                                           To avoid that, I started with a small value of Kp (1) to decrease the overshoot, (2) to give the sensor more time to read. 
                                           Because I am testing the car at about 1500 mm away from the wall, Kp=0.07 gives the PWM value about 84 (PWM value= 0.07*(1500-300)= 84) 
                                           which seems reasonable to start. Using this logic, I started testing the Kp from the range between 0.03 to 0.1 and saw that for Kp below 
                                           0.07 the car moves really slow and for Kp above 0.07 the car overshoots and bumps into the wall. </p>
-                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
-                                          
-                                    <pre id="mypre"
-                                        style="background: darkslategray; color: white;
-                                               width:100%; padding:20px; font-size: 16px;
-                                               white-space: pre-line; text-align:left">
-                                               <code> 
-                                               //Computing the PWM value using proportional control
-                                              int limit_range(double Output){
-                                                if (Output>=255){
-                                                  return 255;
-                                                }
-                                                else if (Output<45){
-                                                  return 45;
-                                                }
-                                                else{
-                                                  return Output;
-                                                }
-                                              }
-                                                </code>
-                                                </pre>
-                                          
-                                            <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                         <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                             <pre id="mypre"
                                                 style="background: darkslategray; color: white;
                                                        width:100%; padding:20px; font-size: 16px;
@@ -1074,7 +1044,37 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                                         }
                                                         </code>
                                                         </pre>
+                                   
+                                    <h5 class="text-left text-secondary mb-0;">Limiting Range: </h5>
+                                             <p class="text-left text-secondary mb-0;"> 
+                                          I also implemented the following code to make sure that the calculated PWM value doesn’t 
+                                          ]exceed the lower limit and upper limit. The PWM signal for <strong>analogWrite()</strong> ranges from 0 to 255 
+                                          therefore I set the upper limit as 255. So when the calculated PWM value exceeds 255, I set it equal to <strong>255</strong>. 
+                                          To choose the lower limit, I used the PWM value I got from the previous lab which is the minimum PWM value for 
+                                          the car to start moving (=45) instead of only making a struggling sound. So when the calculated PWM value gets lower than 45, I set it equals to <strong>45</strong>.
+                                          </p>
+                                          <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
                                           
+                                    <pre id="mypre"
+                                        style="background: darkslategray; color: white;
+                                               width:100%; padding:20px; font-size: 16px;
+                                               white-space: pre-line; text-align:left">
+                                               <code> 
+                                               //Computing the PWM value using proportional control
+                                              int limit_range(double Output){
+                                                if (Output>=255){
+                                                  return 255;
+                                                }
+                                                else if (Output<45){
+                                                  return 45;
+                                                }
+                                                else{
+                                                  return Output;
+                                                }
+                                              }
+                                                </code>
+                                                </pre>
+                                                
                                           <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
                                               <p class="text-left text-secondary mb-0;"> 
                                           The following video demonstrates the proportional controller using <strong>Kp= 0.07</strong>. We can see that the car overshot the 
