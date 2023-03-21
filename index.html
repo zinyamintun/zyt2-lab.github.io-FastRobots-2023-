@@ -1011,35 +1011,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           where the target distance is set to 300 mm. Then I multiplied the error with proportional gain which I found by testing various
                                           values to find the PWM value. If the error was a positive number, meaning the sensor distance reading was larger than target distance, 
                                           then the PWM value will be positive and the robot will drive closer to the wall and vice versa.</p>
-                                    <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
-                                    <pre id="mypre"
-                                        style="background: darkslategray; color: white;
-                                               width:100%; padding:20px; font-size: 16px;
-                                               white-space: pre-line; text-align:left">
-                                               <code> 
-                                               //Computing the PWM value using proportional control
-                                               void p_pid(){
-                                                  double error= dist2-300;
-                                                  Output= kp*e;  
-                                                  drive(Output);
-                                                  }
-                                                }
-
-                                               void drive(double Output){
-                                                  if (Output>0){
-                                                    moveForward(limit_range(Output));
-                                                  }
-                                                  else if (Output<0){
-                                                    moveBackward(limit_range(Output));
-                                                  }
-                                                  else{
-                                                    slowStop();
-                                                  }
-                                                }
-                                                </code>
-                                                </pre>
-                                                
-                                     
+                                   
                                     <h4 class="text-left text-secondary mb-0;">Limiting Range: </h4>
                                              <p class="text-left text-secondary mb-0;"> 
                                           I also implemented the following code to make sure that the calculated PWM value doesn’t 
@@ -1077,7 +1049,33 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           Because I am testing the car at about 1500 mm away from the wall, Kp=0.07 gives the PWM value about 84 (PWM value= 0.07*(1500-300)= 84) 
                                           which seems reasonable to start. Using this logic, I started testing the Kp from the range between 0.03 to 0.1 and saw that for Kp below 
                                           0.07 the car moves really slow and for Kp above 0.07 the car overshoots and bumps into the wall. </p>
-                                           <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                            <h6 class="text-left text-secondary mb-0;">Arduino Code:</h6>
+                                            <pre id="mypre"
+                                                style="background: darkslategray; color: white;
+                                                       width:100%; padding:20px; font-size: 16px;
+                                                       white-space: pre-line; text-align:left">
+                                                       <code> 
+                                                       //Computing the PWM value using proportional control
+                                                       void p_pid(){
+                                                          double error= dist2-300;
+                                                          Output= kp*e;  
+                                                          drive(Output);
+                                                          }
+                                                        }
+
+                                                       void drive(double Output){
+                                                          if (Output>0){
+                                                            moveForward(limit_range(Output));
+                                                          }
+                                                          else if (Output<0){
+                                                            moveBackward(limit_range(Output));
+                                                          }
+                                                          else{
+                                                            slowStop();
+                                                          }
+                                                        }
+                                                        </code>
+                                                        </pre>
                                           
                                           <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
                                               <p class="text-left text-secondary mb-0;"> 
