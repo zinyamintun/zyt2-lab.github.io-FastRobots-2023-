@@ -974,6 +974,34 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         }
                                         </code>
                                         </pre>
+                                        <h6 class="text-left text-secondary mb-0;">Jupyter Notebook Code:</h6>
+                                                 <pre id="mypre" 
+                                                    style="background: darkslategray; color: white;
+                                                        width:100%; padding:20px; font-size: 16px;
+                                                        white-space: pre-line; text-align:left">
+                                                <code>    
+                                                //robot_control is a class in python that helps to call the command in Arduino using just by calling the class method
+                                                rc= robot_control(ble) 
+                                                rc.start_task() 
+                                                rc.start_record()
+                                                rc.stop_task()
+                                                await asyncio.sleep(1)
+                                                
+                                                //initializing the list to store in computer side
+                                                time_arr=[]
+                                                front_dist_arr=[]
+                                                output_arr=[]
+                                                
+                                                //storing the data in computer side
+                                                for i in range(size_val):
+                                                    rc.get_data(i)
+                                                    await asyncio.sleep(0.2)
+                                                    front_dist_arr.append(front_dist)
+                                                    #side_dist_arr.append(side_dist)
+                                                    time_arr.append(time)
+                                                    output_arr.append(speed)
+                                              </code>
+                                              </pre>
 
                                  <hr>
                                   <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
@@ -1092,7 +1120,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                             </pre>
                                           <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
                                               <p class="text-left text-secondary mb-0;"> 
-                                          The following video demostrates the proportional controller using Kp= 0.07 and Kd=0.08. We can see that the car overshot less 
+                                          The following video demostrates the proportional controller using Kp= 0.07 and Kd=0.08. We can see that the car overshoot less 
                                           than before and reached the target distance faster.<br>
                                           <iframe width="560" height="345" src="https://www.youtube.com/embed/GcXjqu0sQIM?controls=1"> </iframe>  <br>
                                           I plotted the <strong>Distance vs. Time </strong>and <strong>PWM value vs. Time</strong> for Kp= 0.07 and Kd=0.08 which show 
