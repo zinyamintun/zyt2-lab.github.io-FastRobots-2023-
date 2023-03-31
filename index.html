@@ -1177,7 +1177,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <img src="Lab 7/state_space_eqn.jpg" alt="state_space_eqn.jpg" style="width:100%"></p>
                                     <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
                                      <p class="text-left text-secondary mb-0;">
-                                         Finally, we need to specify initial state uncertainty, process noise and sensor noise covariance matrix. <br><br>
+                                         To implement the Kalman Filter, we need to specify <strong>initial state uncertainty, process noise</strong> and <strong>sensor noise covariance matrix</strong>. <br>
                                          <strong>Initial state uncertainty:</strong> Since the robot is not moving, we have strong confidence in the accuracy 
                                          of both our sensor value (initial distance) and initial velocity. Therefore, as a starting point I both of the to be 5^{2}.
                                          <br><br>
@@ -1200,7 +1200,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          <img src="Lab 7/kf_sim_pwm.png" alt="kf_sim_pwm.png" style="width:100%"></p>
                                     <h4 class="text-left text-secondary mb-0;">Kalman Filter Implementation: </h4>
                                     <p class="text-left text-secondary mb-0;">
-                                        Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br><br>
+                                        Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br>
                                         After doing many trials and errors, I observed that the robot overshoot and hit the wall until I increased 
                                         the sensor noise covariance. This makes sense because the accuracy of the sensor decreases (or increases in sensor noises)
                                         when the robot is moving at a high speed compared to the static robot. Additionally, when the process noise covariance matrix 
