@@ -1149,9 +1149,47 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 7"/>
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                      The goal of this lab is to implement the Kalman Filter which helps to execute the behavior of PID faster. 
+                                        Kalman Filter supplements the slowly sampled TOF values such that we can speed toward the wall as fast as 
+                                        possible. </p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        To implement the Kalman Filter, we first need to define the A, B, C matrices to build the state space model for our system.
+                                        These matrices depend on drag and momentum which we estimated by driving the car towards a wall using a step response. <br><br>
+                                        I chose the step-size to be <strong>98 PWM </strong>value which was the highest PWM value from my third trial for running PID control in Lab 6
+                                        (to keep the dynamics similar). <br><br>
+                                        I used the TOF sensor data from step response to plot the <strong>Distance vs Time </strong>graph as shown below. <br><br>
+                                        <img src="Lab 7/step_input_distance.png" alt="step_input_distance.png" style="width:100%"><br>
+                                        Using the distance and time data, I calculated the velocity and plotted the following figure. From the graph, 
+                                        I find that the steady state velocity is <strong>1800 mm/s</strong> and 90% rise time is <strong>1700 ms </strong>
+                                        [the time where the system reaches the 90% of the steady state velocity]. Since my starting 
+                                        PWM is high and the lab didn’t have enough space, it didn’t reach the steady state velocity. 
+                                        To take into account of this I choose the steady state velocity to be slightly higher. <br><br>
+                                        <img src="Lab 7/step_input_velocity.jpg" alt="step_input_velocity.jpg" style="width:100%"><br><br>
+                                        d = u/x-dot = 1/1800 = 5.55e-4<br>
+                                        m = -dt(0.9)/ln(0.1) = -(5.55e-4)(1.7)/ln(0.1)= 4.10167 e-4<br><br>
+                                        We now have our A, B, C matrices as shown as below. <br>
+                                        <img src="Lab 7/state_space_eqn.jpg" alt="state_space_eqn.jpg" style="width:100%"></p>
+                                    <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
+                                     <p class="text-left text-secondary mb-0;">
+                                         Finally, we need to specify initial state uncertainty, process noise and sensor noise covariance matrix. <br><br>
+                                         <strong>Initial state uncertainty:</strong> Since the robot is not moving, we have strong confidence in the accuracy 
+                                         of both our sensor value (initial distance) and initial velocity. Therefore, as a starting point I both of the to be 5^2.
+                                         <br><br>
+                                         <strong>Process noise covariance: </strong>This is in a way a measure of how much trust we are putting into our model.
+                                         Assuming our sensor is off by +/- 30 mm then I chose the both of the process noise covariance to be 102. <br><br>
+
+
+                                        
+                                        
+
+
+                                    
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
