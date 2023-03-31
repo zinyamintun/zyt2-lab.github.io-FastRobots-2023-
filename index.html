@@ -1179,10 +1179,10 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                      <p class="text-left text-secondary mb-0;">
                                          To implement the Kalman Filter, we need to specify <strong>initial state uncertainty, process noise</strong> and <strong>sensor noise covariance matrix</strong>. <br>
                                          <strong>Initial state uncertainty:</strong> Since the robot is not moving, we have strong confidence in the accuracy 
-                                         of both our sensor value (initial distance) and initial velocity. Therefore, as a starting point I both of the to be 5^{2}.
+                                         of both our sensor value (initial distance) and initial velocity. Therefore, as a starting point I both of the to be 5<sup>2</sup>.
                                          <br><br>
                                          <strong>Process noise covariance: </strong>This is in a way a measure of how much trust we are putting into our model.
-                                         Assuming our sensor is off by +/- 30 mm then I chose the both of the process noise covariance to be 10^{2}. <br><br>
+                                         Assuming our sensor is off by +/- 30 mm then I chose the both of the process noise covariance to be 10<sup>2</sup>. <br><br>
                                          <strong>Sensor noise covariance: </strong>This is in a way a measure of how much trust we are putting into our sensor. To determine this,
                                          I collected TOF sensor data for about 15 seconds while it’s sitting still. Then I used the data to determine the standard 
                                          deviation <strong>(=1.29397)</strong> and the covariance is the square of that number. <br><br>
