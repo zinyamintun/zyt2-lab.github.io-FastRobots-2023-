@@ -1183,13 +1183,32 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          <br><br>
                                          <strong>Process noise covariance: </strong>This is in a way a measure of how much trust we are putting into our model.
                                          Assuming our sensor is off by +/- 30 mm then I chose the both of the process noise covariance to be 10^{2}. <br><br>
-
-
-                                        
-                                        
-
-
-                                    
+                                         <strong>Sensor noise covariance: </strong>This is in a way a measure of how much trust we are putting into our sensor. To determine this,
+                                         I collected TOF sensor data for about 15 seconds while it’s sitting still. Then I used the data to determine the standard 
+                                         deviation <strong>(=1.29397)</strong> and the covariance is the square of that number. <br><br>
+                                         Using this information, I wrote the code for Kalman Filter in the Jupyter Notebook to do the sanity check on the lab 6
+                                         trial 3 data before I implemented it on the robot. <br>
+                                         <script src="https://gist.github.com/zinyamintun/582f471fc2503a5a3f07246e7740e4a6.js"></script><br><br>
+                                         I plotted the Kalman Filter data and lab 6 data (TOF data and PWM) in the following figures. As you can see, 
+                                         the Kalman Filter follows the actual data pretty well. This is as expected because the chosen sensor noise covariance 
+                                         for the TOF was about 10 times smaller than the Process noise covariance. After playing around with the covariance numbers,
+                                         I saw that the larger sensor noise covariance is the more Kalman Filter stray away from the actual data. Since the robot did stop 
+                                         around 304 mm [by observation], it seems reasonable to trust the TOF sensor data more.<br><br>
+                                         <img src="Lab 7/KF_sim_distance.png" alt="KF_sim_distance.png" style="width:100%"><br>
+                                         <img src="Lab 7/kf_sim_pwm.png" alt="kf_sim_pwm.png" style="width:100%"></p>
+                                    <h4 class="text-left text-secondary mb-0;">Kalman Filter Implementation: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br><br>
+                                        After doing many trials and errors, I observed that the robot overshoot and hit the wall until I increased 
+                                        the sensor noise covariance. This makes sense because the accuracy of the sensor decreases (or increases in sensor noises)
+                                        when the robot is moving at a high speed compared to the static robot. Additionally, when the process noise covariance matrix 
+                                        is low, I observed that the robot is oscillating back and forth near the target distance. Therefore, I tuned the process
+                                        noise covariance until the robot stopped oscillating. <br><br>
+                                        <script src="https://gist.github.com/zinyamintun/6899e0b246843fd4081139993450d5e7.js"></script><br><br>
+                                        From looking at the final result, the PWM value of the robot increases from 100 to 150 successfully without crashing the walls. <br><br>
+                                         <img src="Lab 7/real_kf_dist.png" alt="real_kf_dist.png" style="width:100%"><br>
+                                         <img src="Lab 7/real_kf_pwm.png" alt="real_kf_pwm.png" style="width:100%"></p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
