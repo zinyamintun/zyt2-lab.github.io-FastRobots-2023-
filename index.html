@@ -1174,7 +1174,33 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         d = u/x-dot = 1/1800 = 5.55e-4<br>
                                         m = -dt(0.9)/ln(0.1) = -(5.55e-4)(1.7)/ln(0.1)= 4.10167 e-4<br><br>
                                         We now have our A, B, C matrices as shown as below. <br>
-                                        <img src="Lab 7/state_space_eqn.jpg" alt="state_space_eqn.jpg" style="width:100%"></p>
+                                        A=
+                                        <table class="matrix">
+                                          <tr>
+                                            <td>0</td>
+                                            <td>1</td>
+                                          </tr>
+                                          <tr>
+                                            <td>0</td>
+                                            <td>-<sup>d</sup>&frasl;<sub>m</sub></td>
+                                          </tr>
+                                        </table><br>
+                                    B=
+                                    <table class="matrix">
+                                          <tr>
+                                            <td>0</td>
+                                          </tr>
+                                          <tr>
+                                            <td><sup>1</sup>&frasl;<sub>m</sub></td>
+                                          </tr>
+                                        </table><br>
+                                    C=
+                                    <table class="matrix">
+                                          <tr>
+                                              <td>-1</td>
+                                            <td>0</td>
+                                          </tr>
+                                        </table>
                                     <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
                                      <p class="text-left text-secondary mb-0;">
                                          To implement the Kalman Filter, we need to specify <strong>initial state uncertainty, process noise</strong> and <strong>sensor noise covariance matrix</strong>. <br>
