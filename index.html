@@ -1171,11 +1171,11 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         PWM is high and the lab didn’t have enough space, it didn’t reach the steady state velocity. 
                                         To take into account of this I choose the steady state velocity to be slightly higher. <br><br>
                                         <img src="Lab 7/step_input_velocity.jpg" alt="step_input_velocity.jpg" style="width:100%"><br><br>
-                                        d = u/x-dot = 1/1800 = 5.55e-4<br>
-                                        m = -dt(0.9)/ln(0.1) = -(5.55e-4)(1.7)/ln(0.1)= 4.10167 e-4<br><br>
+                                        d = <sup>u</sup>&frasl;<sub>x'</sub>= <sup>1</sup>&frasl;<sub>1800</sub>= 5.55 x 10<sup>-4</sup><br>
+                                        m = <sup>-dt<sup>0.9</sup></sup>&frasl;<sub>ln(0.1)</sub> = <sup>(5.55 x 10<sup>-4</sup>)(1.7)</sup>&frasl;<sub>ln(0.1)</sub>= 4.10167 x 10<sup>-4</sup><br><br>
                                         We now have our A, B, C matrices as shown as below. <br>
                                         A=
-                                        <table class="matrix">
+                                        <table class="text-left text-secondary mb-0;">
                                           <tr>
                                             <td>0</td>
                                             <td>1</td>
@@ -1186,7 +1186,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           </tr>
                                         </table><br>
                                     B=
-                                    <table class="matrix">
+                                    <table class="text-left text-secondary mb-0;">
                                           <tr>
                                             <td>0</td>
                                           </tr>
@@ -1195,7 +1195,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           </tr>
                                         </table><br>
                                     C=
-                                    <table class="matrix">
+                                    <table class="text-left text-secondary mb-0;">
                                           <tr>
                                               <td>-1</td>
                                             <td>0</td>
