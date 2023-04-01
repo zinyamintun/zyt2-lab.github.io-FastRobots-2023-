@@ -1123,6 +1123,29 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                           the clear improvement in the close loop control system as I discussed above. <br><br>
                                           <img src="Lab 6/PD_control_plot.png" alt="PD_control_plot.png" style="width:100%"><br>
                                           </p>  
+                                          <h4 class="text-left text-secondary mb-0;">PID Controller</h4>
+                                           <p class="text-left text-secondary mb-0;"> 
+                                          Although PD controls work pretty well, we can see that there is some inconsistency between 
+                                          each trial. Because the repeatability of the robot is really important, I tried implementing 
+                                          the PID control using all three terms and tuned all of the control gains. In addition to adding 
+                                          the integral term which I sum the error, for this implementation I also take into consideration that 
+                                          the sampling rate is different for each time. Furthermore, rather than storing the data for every 0.5 second,
+                                          I changed the code to store the data for every time the data is collected. This is because I noticed that 
+                                          storing the data this way didn’t affect the speed of the sampling rate that much and give more accurate results. <br><br>
+                                          From trials and errors, I chose <strong>Kp = 0.07, Kd = 0.002, Ki= 0.125</strong>. 
+                                          </p>
+                                          <script src="https://gist.github.com/zinyamintun/260c5c53d3d7424795f5e4c4525a9404.js"></script>
+                                           <p class="text-left text-secondary mb-0;"> 
+                                          In the following video, I demonstrated the 3 trials of running the PID control. 
+                                          Both in the video and the graph we can see that all of the three runs were pretty consistent. 
+                                           <h6 class="text-left text-secondary mb-0;">Video Demonstration:</h6>
+                                              <p class="text-left text-secondary mb-0;"> 
+                                              <iframe width="560" height="345" src="https://www.youtube.com/embed/h0l6irkvzJY?controls=1"> </iframe>  <br>
+                                     
+                                              By graphing the three overlap graph, I demostrated the repeatability of my control system. <br><br>
+                                              <img src="Lab 6/pid_dist.png" alt="pid_dist.png" style="width:100%"><br><br>
+                                              <img src="Lab 6/pid_pwm.png" alt="pid_pwm.png" style="width:100%"></p>
+                                 
                                     <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
@@ -1173,7 +1196,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <img src="Lab 7/step_input_velocity.jpg" alt="step_input_velocity.jpg" style="width:100%"><br>
                                          <img src="Lab 7/d_m_matrix.png" alt="d_m_matrix.png" style="width:50%"><br><br>
                                         We now have our A, B, C matrices as shown as below. <br>
-                                       <img src="Lab 7/ABC_matrix.png" alt="ABC_matrix.png" style="width:50%"><br>
+                                       <img src="Lab 7/ABC_matrix.png" alt="ABC_matrix.png" style="width:40%"><br>
                                     <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
                                      <p class="text-left text-secondary mb-0;">
                                          To implement the Kalman Filter, we need to specify <strong>initial state uncertainty, process noise</strong> and <strong>sensor noise covariance matrix</strong>. <br>
@@ -1200,19 +1223,20 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          <img src="Lab 7/kf_sim_pwm.png" alt="kf_sim_pwm.png" style="width:100%"></p>
                                     <h4 class="text-left text-secondary mb-0;">Kalman Filter Implementation: </h4>
                                     <p class="text-left text-secondary mb-0;">
-                                        Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br>
+                                        Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br><br>
                                         In the video, we see that the robot was driving toward the left because the right motor was stronger 
                                         than the left. In order for the robot to go straight I tuned up the left motor by multiplying it with a factor 
                                         of 1.2. After doing many trials and errors, I observed that the robot overshoot and hit the wall until I increased 
                                         the sensor noise covariance. This makes sense because the accuracy of the sensor decreases (or increases in sensor 
                                         noises) when the robot is moving at a high speed compared to the static robot. Additionally, when the process noise 
                                         covariance matrix is low, I observed that the robot is oscillating back and forth near the target distance. Therefore,
-                                        I tuned the process noise covariance until the robot stopped oscillating. <br>
-                                        <img src="Lab 7/final_sig.png" alt="final_sig.png" style="width:50%"><br>
+                                        I tuned the process noise covariance until the robot stopped oscillating. </p>
+                                        <img src="Lab 7/final_sig.png" alt="final_sig.png" style="width:40%"><br>
                                         <script src="https://gist.github.com/zinyamintun/6899e0b246843fd4081139993450d5e7.js"></script><br><br>
+                                    <p class="text-left text-secondary mb-0;">
                                         In the following video, I included the videos from trials that demonstrate the behavior of the robot that I discussed above and the final successful round. <br>
-                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/jm41r1gBSU8?controls=1"> </iframe>
-                                        From looking at the final result, the PWM value of the robot increases from 100 to 150 successfully without crashing the walls. <br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/jm41r1gBSU8?controls=1"> </iframe><br>
+                                        From looking at the final result, the PWM value of the robot increases successfully without crashing the walls from 100 to 150. <br><br>
                                          <img src="Lab 7/real_kf_dist.png" alt="real_kf_dist.png" style="width:100%"><br>
                                          <img src="Lab 7/real_kf_pwm.png" alt="real_kf_pwm.png" style="width:100%"></p>
                                     <hr>
