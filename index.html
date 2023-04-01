@@ -1170,37 +1170,10 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         [the time where the system reaches the 90% of the steady state velocity]. Since my starting 
                                         PWM is high and the lab didn’t have enough space, it didn’t reach the steady state velocity. 
                                         To take into account of this I choose the steady state velocity to be slightly higher. <br><br>
-                                        <img src="Lab 7/step_input_velocity.jpg" alt="step_input_velocity.jpg" style="width:100%"><br><br>
-                                        d = <sup>u</sup>&frasl;<sub>x'</sub>= <sup>1</sup>&frasl;<sub>1800</sub>= 5.55 x 10<sup>-4</sup><br>
-                                        m = <sup>-dt<sup>0.9</sup></sup>&frasl;<sub>ln(0.1)</sub> = <sup>(5.55 x 10<sup>-4</sup>)(1.7)</sup>&frasl;<sub>ln(0.1)</sub>= 4.10167 x 10<sup>-4</sup><br><br>
+                                        <img src="Lab 7/step_input_velocity.jpg" alt="step_input_velocity.jpg" style="width:100%"><br>
+                                         <img src="Lab 7/d_m_matrix.png" alt="d_m_matrix.png" style="width:50%"><br><br>
                                         We now have our A, B, C matrices as shown as below. <br>
-                                        A=
-                                        <table class="text-left text-secondary mb-0;">
-                                          <tr>
-                                            <td>0</td>
-                                            <td>1</td>
-                                          </tr>
-                                          <tr>
-                                            <td>0</td>
-                                            <td>-<sup>d</sup>&frasl;<sub>m</sub></td>
-                                          </tr>
-                                        </table><br>
-                                    B=
-                                    <table class="text-left text-secondary mb-0;">
-                                          <tr>
-                                            <td>0</td>
-                                          </tr>
-                                          <tr>
-                                            <td><sup>1</sup>&frasl;<sub>m</sub></td>
-                                          </tr>
-                                        </table><br>
-                                    C=
-                                    <table class="text-left text-secondary mb-0;">
-                                          <tr>
-                                              <td>-1</td>
-                                            <td>0</td>
-                                          </tr>
-                                        </table>
+                                       <img src="Lab 7/ABC_matrix.png" alt="ABC_matrix.png" style="width:50%"><br>
                                     <h4 class="text-left text-secondary mb-0;">Estimating Drag and Momentum: </h4>
                                      <p class="text-left text-secondary mb-0;">
                                          To implement the Kalman Filter, we need to specify <strong>initial state uncertainty, process noise</strong> and <strong>sensor noise covariance matrix</strong>. <br>
@@ -1214,6 +1187,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          deviation <strong>(=1.29397)</strong> and the covariance is the square of that number. <br><br>
                                          Using this information, I wrote the code for Kalman Filter in the Jupyter Notebook to do the sanity check on the lab 6
                                          trial 3 data before I implemented it on the robot. <br>
+                                         <img src="Lab 7/noise_matrix.png" alt="noise_matrix.png" style="width:50%"><br>
                                          <script src="https://gist.github.com/zinyamintun/582f471fc2503a5a3f07246e7740e4a6.js"></script>
                                     </p>
                                     <p class="text-left text-secondary mb-0;">
@@ -1227,12 +1201,17 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                     <h4 class="text-left text-secondary mb-0;">Kalman Filter Implementation: </h4>
                                     <p class="text-left text-secondary mb-0;">
                                         Finally, I integrated the Kalman Filter with the Lab 6 PID code and implemented it on the robot.<br>
-                                        After doing many trials and errors, I observed that the robot overshoot and hit the wall until I increased 
-                                        the sensor noise covariance. This makes sense because the accuracy of the sensor decreases (or increases in sensor noises)
-                                        when the robot is moving at a high speed compared to the static robot. Additionally, when the process noise covariance matrix 
-                                        is low, I observed that the robot is oscillating back and forth near the target distance. Therefore, I tuned the process
-                                        noise covariance until the robot stopped oscillating. <br><br>
+                                        In the video, we see that the robot was driving toward the left because the right motor was stronger 
+                                        than the left. In order for the robot to go straight I tuned up the left motor by multiplying it with a factor 
+                                        of 1.2. After doing many trials and errors, I observed that the robot overshoot and hit the wall until I increased 
+                                        the sensor noise covariance. This makes sense because the accuracy of the sensor decreases (or increases in sensor 
+                                        noises) when the robot is moving at a high speed compared to the static robot. Additionally, when the process noise 
+                                        covariance matrix is low, I observed that the robot is oscillating back and forth near the target distance. Therefore,
+                                        I tuned the process noise covariance until the robot stopped oscillating. <br>
+                                        <img src="Lab 7/final_sig.png" alt="final_sig.png" style="width:50%"><br>
                                         <script src="https://gist.github.com/zinyamintun/6899e0b246843fd4081139993450d5e7.js"></script><br><br>
+                                        In the following video, I included the videos from trials that demonstrate the behavior of the robot that I discussed above and the final successful round. <br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/jm41r1gBSU8?controls=1"> </iframe>
                                         From looking at the final result, the PWM value of the robot increases from 100 to 150 successfully without crashing the walls. <br><br>
                                          <img src="Lab 7/real_kf_dist.png" alt="real_kf_dist.png" style="width:100%"><br>
                                          <img src="Lab 7/real_kf_pwm.png" alt="real_kf_pwm.png" style="width:100%"></p>
