@@ -1264,10 +1264,42 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 8"/>
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    </div> <!-- Portfolio Modal - Text-->
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                      The purpose of this lab is to combine everything we have done so far to do some fast stunts.  </p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Controlled Stunts: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        Because I chose Task A for lab 6-7, for the controlled stunts, the task is to start the robot at <strong><4m</strong> away 
+                                       from the wall, drive fast forward, and when it reaches the sticky matt’s center (about <strong>500 mm </strong>away from the wall), 
+                                      perform a flip, and drive back to the direction from which it came. <br><br>
+                                    From lab 4, I observed that there are multiple ways to perform this flip; drive to the wall at the highest 
+                                        speed and when it reaches the desired distance (1) stop the car with brake/slow decay mode or (2) drive the car with highest 
+                                        speed in reverse direction. After trying both methods, I noticed that the second method works better for me because (1)the
+                                        brake stop didn’t give enough friction for the car to flip and (2) the second method performed the task faster. <br><br>
+                                        I disengaged the PID position control and only used the Kalman Filter because for this task we wanted the robot to 
+                                        go as fast as possible and not be slowing down as it would if it was doing PID position control. With this in mind, 
+                                        I used the following Arduino code to implement this. <br><br>
+                                        <script src="https://gist.github.com/zinyamintun/36cc8b737b34cb658431e9c03d47946c.js"></script><br><br>
+                                        After many trials and errors, I noticed that the car was overshooting in almost every trial. Therefore, I adjusted the desired distance to <strong>980 mm</strong>
+                                        which can be seen in the code above. <br><br>
+                                        This stunt is very dependent on many factors such as: the battery of the motor, the landing of the car, PWM values of the left and right motor, and 
+                                        friction between the floor and the wheel. After doing many many trials, I was able to perform three successful stunts as 
+                                        demonstrated in the following video. <br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/d9Pnnoao4MU?controls=1"> </iframe><br><br>
+                                        I have also graphed the TOF data, KF data, and PWM input vs time. I noticed that when the TOF sensor reading was around 1000, the KF distance was around 500. This corresponds to what I observed because in
+                                        my code the car is supposed to flip at a distance ~950 mm away from the wall but in the video the actual distance 
+                                        where the car flip around 500 mm. <br><br>
+                                        <img src="Lab 8/distance_graph.png" alt="distance_graph.png" style="width:100%"><br><br>
+                                        <img src="Lab 8/pwm_graph.png" alt="pwm_graph.png" style="width:100%"></p>
+                                         <h4 class="text-left text-secondary mb-0;">Bloopers: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        In most trials, the car moves in very unexpected ways. Here are some bloopers of how the car really behaves:)
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed//LLAHXzWzlek?controls=1"> </iframe>
+                                    </p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
