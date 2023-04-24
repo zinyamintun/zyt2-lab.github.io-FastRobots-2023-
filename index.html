@@ -130,7 +130,7 @@
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal8">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/comingsoon.png" alt="Tasty Cake"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/Lab 9 profile.png" alt="Lab 9 profile"/>
                         </div>
                     </div>
                     <!-- Portfolio Items 10-->
@@ -1326,9 +1326,67 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 9"/>
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                      The purpose of this lab is to map out a static room. To build this map, we place our robot at a couple of marked up locations around the lab, 
+                                        spin the robot while collecting ToF readings. Finally, we merge the data together using transformation matrices and plot them on x-y coordinates to draw up the map.   </p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Control: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The quality of the map depends on (1) the number of readings, and (2) how consistently they are separated in angular space. Therefore, we will need to rotate 
+                                        the robot at a slow and constant angular speed to complete the task. To do so we can either use (1) open loop control, (2) PID control 
+                                        on orientation (i.e. integrated gyroscope values), or (3) PID control on angular speed (i.e. the raw gyroscope values). Since I did task 
+                                        A for lab 6-8, I chose (3) PID control on angular speed for controlling the robot’s rotation. <br><br>
+                                        In the previous lab, I configured PID control for the front ToF sensor. In this lab, I used the ComputePID() function that I have written in lab 6 on the raw gyroscope values (Z direction) 
+                                        from the IMU sensor readings. For the set value, I chose <strong> 15 degrees per second </strong> to make sure the robot rotated at a slow enough rate to get sufficient data. <br><br>
+                                        <script src="https://gist.github.com/zinyamintun/4855cc03ce142fa70f5b4501eab1f2b8.js"></script> 
+                                    </p>
+                                        <p class="text-left text-secondary mb-0;">
+                                        After collecting the data, I realized that using PWM as 15 rotates the car really slow. To fix this issue I changed the baseline value of the PWM value to <strong>40</strong> instead of 0 (default).
+                                            To implement this, I still compute the error on the angular speed as before but for setting the PWM I let the error to adjust around the baseline value of 40. If the car was rotating at a rate slower
+                                            than 15 degrees per sec, the error is negative and thus increases the PWM to above 40. If the car was rotating at a rate faster than 15 degrees per second, the error is then  positive and thus increases 
+                                            the PWM to above 40.  <br><br>
+                                            <script src="https://gist.github.com/zinyamintun/2544de7c207b15ba96a12139d37b0c3f.js"></script>
+                                    </p>
+                                    <h6 class="text-left text-secondary mb-0;">Video Demostration: </h6>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The video demonstrated that the car rotates pretty smoothly at relatively constant speed without shifting too much from 
+                                        the original position. <br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/3_vwstyb1Fo?controls=1"> </iframe></p>
+                                    <h4 class="text-left text-secondary mb-0;">Read Out Distance: </h4>
+                                     <p class="text-left text-secondary mb-0;">
+                                    After collecting ToF reading from five marked up locations in the lab, I plotted TOF output over time in a polar coordinate system. 
+                                    As we can see in the following graphs, the ToF readings are more accurate at detecting nearby objects and noisy at detecting far 
+                                    away objects. <br><br>
+                                         <img src="Lab 9/polar_map.png" alt="polar_map.png" style="width:100%"></p>
+                                    
+                                     <h4 class="text-left text-secondary mb-0;">Merge and Plot Readings: </h4>
+                                     <p class="text-left text-secondary mb-0;">
+                                    After gathering all the data points from each markup location, I need to convert the ToF sensor measurements into an inertial 
+                                         reference frame of the room and plot them together to plot the final map. Using the transformation matrices, 
+                                         the mapping from polar coordinate measurements to the cartesian coordinates is as follows: <br><br>
+                                         <img src="Lab 9/trans_matrix.png" alt="trans_matrix.png" style="width:50%"><br><br>
+                                         Finally, to map these cartesian coordinates data to the inertial reference frame of the room, I translated each x,y 
+                                         data from the robot's frame origin to the x, y data with respect to the room's origin by adding the marked 
+                                         up coordinates. Since the ToF data are in millimeters, I converted the marked up coordinates from foot to 
+                                         millimeters before doing the transformation (1 foot =304.8 mm).  <br><br>
+                                         Finally, I plotted all the final x, y data points on one map using the python script and got the following
+                                         results.<br><br>
+                                          <img src="Lab 9/with_outlier.png" alt="with_outlier.png" style="width:100%"><br><br>
+                                         To improve the map, I removed some of the outliers then took the data again at [0,0] location.
+                                        <img src="Lab 9/final_map.png" alt="final_map.png" style="width:100%"></p>
+                                    <h4 class="text-left text-secondary mb-0;">Convert to Line Based Map </h4>
+                                     <p class="text-left text-secondary mb-0;">
+                                         Finally, in order to use this map for the localization (Lab 10 and 11), I manually estimated the location of the actual 
+                                         walls and obstacles in this map. To do so, I observed the general location of the data points to get the coordinates of 
+                                         the estimated lines. Then, I graphed the line estimations on top of the map. <br><br>
+                                         <img src="Lab 9/estimated.png" alt="estimated.png" style="width:100%"><br><br>
+                                         <img src="Lab 9/with_line_estimation.png" alt="with_line_estimation.png" style="width:100%"><br><br>
+                                         To check the accuracy of my lab, I used the data from Anya's lab 9 and plotted the actual map on top of my plot. 
+                                         <img src="Lab 9/actual.png" alt="actual.png" style="width:100%"><br><br>
+                                         <img src="Lab 9/with_line_estimation_and_actual_measurement.png" alt="with_line_estimation_and_actual_measurement.png" style="width:100%"></p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
