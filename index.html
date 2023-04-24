@@ -1366,7 +1366,8 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                     After gathering all the data points from each markup location, I need to convert the ToF sensor measurements into an inertial 
                                          reference frame of the room and plot them together to plot the final map. Using the transformation matrices, 
                                          the mapping from polar coordinate measurements to the cartesian coordinates is as follows: <br><br>
-                                         <img src="Lab 9/trans_matrix.png" alt="trans_matrix.png" style="width:20%"><br><br>
+                                         <img src="Lab 9/trans_matrix.png" alt="trans_matrix.png" style="width:20%"><br>
+                                         <em>Note: My ToF sensor is mounted in the front and I started the robot with same orientation (facing toward the window). </em><br><br>
                                          Finally, to map these cartesian coordinates data to the inertial reference frame of the room, I translated each x,y 
                                          data from the robot's frame origin to the x, y data with respect to the room's origin by adding the marked 
                                          up coordinates. Since the ToF data are in millimeters, I converted the marked up coordinates from foot to 
