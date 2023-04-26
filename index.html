@@ -1435,25 +1435,51 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         components: rotation 1, translation, and rotation 2. We define the output tuple as <strong>control input “u”</strong> which is calculated based on previous 
                                         pose (t-1) and current pose (t) of the robot.<br><br>
                                         <img src="Lab 10/c_c_visual.png" alt="c_c_visual.png" style="width:40%">
-                                        <img src="Lab 10/compute_control_eqn.png" alt="compute_control_eqn.png" style="width:35%"><br><br>
+                                        <img src="Lab 10/compute_control_eqn.png" alt="compute_control_eqn.png" style="width:40%"><br><br>
                                         <script src="https://gist.github.com/zinyamintun/a22a5924ab920868a8d11b8d29eb1015.js"></script></p>
                                     <h4 class="text-left text-secondary mb-0;">Odometry Motion Model: </h4>
                                     <p class="text-left text-secondary mb-0;">
                                         The odom_motion_model function return the <strong>state transition probability “p(x'|x, u)”</strong> which specifies the
                                         probability that the robot is in the current state given the previous state and actual control input u or u(t-1).<br><br>
-                                        Using the compute_control function, we can compute the necessary control input u(t) required for some possible current state 
-                                        using cur_pose and prev_pose as an input. Finally, because we are working with a probabilistic robot, we plug these numbers 
-                                        into the Gaussian function to determine the state transition probability. To use the Gaussian function, we need to specify 
-                                        mu, x, and sigma (the spread of the distribution). We used u(t) as the mu because this is the state where we are executing 
-                                        the motion around. We used u(t-1) as the x because we are interested in the probability that the robot will be in this state.
-                                        Finally, we used the <strong>odom_rot_noise</strong> and <strong>odom_trans_noise</strong> variables defined in <strong>localization.py </strong>file as the sigma. The total 
-                                        probability is then the multiplication of the individual probabilities of delta_rot1, delta_trans, and delta_rot2 with the 
-                                        assumption that these are independent events. <br><br>
-                                        <img src="Lab 10/odom_p.png" alt="odom_p.png" style="width:40%"><br><br>
+                                        Using the compute_control function, I can compute the necessary control input u(t) required for some possible current state 
+                                        using cur_pose and prev_pose as an input. Finally, because this is a probabilistic robot, I plugged these numbers into the
+                                        Gaussian function to determine the state transition probability. To use the Gaussian function, I needed to specify mu, x, and 
+                                        sigma (the spread of the distribution). I used u(t) as the mu because this is the state where we are executing the motion around.
+                                        I used u(t-1) as the x because we are interested in the probability that the robot will be in this state. Finally, I used the 
+                                        <strong>odom_rot_noise</strong> and <strong>odom_trans_noise</strong> variables defined in the <strong>localization.py</strong> file as the sigma. The total probability is then the 
+                                        multiplication of the individual probabilities of delta_rot1, delta_trans, and delta_rot2 with the assumption that these are independent events. <br><br>
+                                        <img src="Lab 10/odom_p.png" alt="odom_p.png" style="width:50%"><br><br>
                                         <script src="https://gist.github.com/zinyamintun/7e5ab12c92030c62b370b40d3e8c6622.js"></script></p>
-                                    
-
-
+                                     <h4 class="text-left text-secondary mb-0;">Prediction Step: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The prediction_step function returns <strong>the prior belief of the robot before incorporating the latest measurement z_t “bel_bar(x_t)” </strong>
+                                        given the cur_odom (current state) and prev_odom (previous state). First, I call the compute_control function again to compute the 
+                                        control input. Then I wrote the nested loop that loop through all the possible states and all the possible previous states. Within 
+                                        each iteration, I called the odom_motion_model using the current pose and previous pose which I found using the <strong>from_map</strong> function 
+                                        from the <strong>Mapper class</strong> and the control input. To compute the bel_bar(x_t), I multiplied the probabilities of being in each state with 
+                                        previous belief at each state and summed them up. Finally, I normalize the result since it’s a probability distribution which should 
+                                        sum up to 1. As we can see, this code is computationally expensive and therefore really slow. To increase the efficiency, I added an 
+                                        extra line of code such that we only iterate through if and only if the motion of the robot is not too small, otherwise doing the computation would only slow down the process.<br><br> 
+                                        <script src="https://gist.github.com/zinyamintun/0edd076264a66bac7c49da2984db83ab.js"></script></p>
+                                    <h4 class="text-left text-secondary mb-0;">Sensor Model: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The sensor_model function returns the <strong>measurement probability “p(z_t|x_t,m)” </strong>which is the probability that the 
+                                        robot is in the correct location given the true observations (current measurements) of the robot. To access the true measurement 
+                                        values that are recorded, I called <strong>obs_range_data</strong> from <strong>BaseLocation</strong>. Since each measurement consists of 18 different individual
+                                        measurements, I just write the for loop that uses a gaussian function to calculate the probabilities of individual measurements 
+                                        within each iteration and return the probability array. <br><br>
+                                        <script src="https://gist.github.com/zinyamintun/ddc480721377b4a4c13d92fbdb258273.js"></script></p>
+                                   <h4 class="text-left text-secondary mb-0;">Update Step: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The update_step function returns <strong>the belief of the robot at the current state “bel(x_t)”</strong> given all past sensor measurements and all past control inputs. This 
+                                        iterates over all the possible states to perform this computation. At each iteration, the sensor model is computed as a joint probability over the 18 sensor
+                                        measurements by comparing the precached sensor data for that cell and latest sensor measurements which is then multiplied by the bel_bar(x_t) which is 
+                                        calculated from the prediction step. Finally since this is also probability distribution I normalized it so that the total probability is 1. 
+                                        <script src="https://gist.github.com/zinyamintun/794eb86ef11eadca9030b43b5b3fbdb5.js"></script></p>
+                                    <h4 class="text-left text-secondary mb-0;">Final Result: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/yYM76d9J0JU?controls=1"> </iframe>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/CdpXs5eEDzU?controls=1"> </iframe></p>
                                     <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
