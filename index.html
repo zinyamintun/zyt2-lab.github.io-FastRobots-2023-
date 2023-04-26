@@ -1413,9 +1413,31 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 10"/>
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                     The purpose of this lab is to execute grid localization using a Bayes filter on a Python simulation 
+                                        as a preliminary step before deploying it on our robot.</p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Bayes Filter:</h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The Bayes Filter Algorithm consists of a for loop that iterates through a state variable (x_t) and within 
+                                        each iteration it performs the following two steps. The first step is called the <strong>prediction step</strong> where we 
+                                        incorporate the control input (movement) data. The second step is called the <strong>update step</strong> where we incorporate 
+                                        the observation (measurement) data. <br><br>
+                                        <img src="Lab 10/bayes.png" alt="bayes.png" style="width:100%"><br><br>
+                                        To implement the Bayes Filter Algorithm, we have broken it down into multiple functions to calculate the parameters. 
+                                        The structure for these functions were provided to us as part of this lab (which was really helpful). To understand Bayes Filter Algorithm, 
+                                        I will go through each of the functions and explain how each parameter was calculated.</p>
+                                    <h4 class="text-left text-secondary mb-0;">Compute Control “u”: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        The compute_control function is responsible for extracting control information, which is stored as a tuple with three
+                                        components: rotation 1, translation, and rotation 2. We define the output tuple as <strong>control input “u”</strong> which is calculated based on previous 
+                                        pose (t-1) and current pose (t) of the robot.<br><br>
+                                        <img src="Lab 10/c_c_visual.png" alt="c_c_visual.png" style="width:40%"><br><br>
+                                        <img src="Lab 10/compute_control_eqn.png" alt="compute_control_eqn.png" style="width:35%"><br><br>
+                                        <script src="https://gist.github.com/zinyamintun/a22a5924ab920868a8d11b8d29eb1015.js"></script></p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
