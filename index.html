@@ -1478,8 +1478,17 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <script src="https://gist.github.com/zinyamintun/794eb86ef11eadca9030b43b5b3fbdb5.js"></script></p>
                                     <h4 class="text-left text-secondary mb-0;">Final Result: </h4>
                                     <p class="text-left text-secondary mb-0;">
-                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/yYM76d9J0JU?controls=1"> </iframe>
-                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/CdpXs5eEDzU?controls=1"> </iframe></p>
+                                        The localization takes about 2 minutes in total which seems reasonable time complexity. In the video, the green line 
+                                        represents ground truth (actual position), the blue line represents the belief (Bayes Filter estimation) and the red line represents 
+                                        odometry (sensor) values. As demonstrated in the video, the trajectory of the green line is fairly close to the blue line thus we can 
+                                        conclude that the Bayes Filter is working well. I also observed that the trajectory is better in a straight path than in the corners. <br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/yYM76d9J0JU?controls=1"> </iframe><br><br>
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/CdpXs5eEDzU?controls=1"> </iframe><br><br>
+                                    From the statistics from one of the trials, we can see the small error by comparing the GT with Belief or looking at POS ERROR.
+                                        We could also conclude that the robot has high confidence in its belief since the probability at the Update state is almost 
+                                        always close to 1. Finally, the POS ERROR for the angle was piling up to a large value because the ground truth update in the 
+                                        angle is not normalized.<br><br>
+                                    <script src="https://gist.github.com/zinyamintun/fdac3d3c1b4e8f04d9cacf1b5f196ac6.js"></script></p>
                                     <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
