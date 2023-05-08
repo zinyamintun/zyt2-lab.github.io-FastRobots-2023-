@@ -1561,20 +1561,32 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <script src="https://gist.github.com/zinyamintun/3a721ddf669edac0fff85cf471e3dd57.js"></script></p>
                                     <h5 class="text-left text-secondary mb-0;">Result: </h5>
                                      <p class="text-left text-secondary mb-0;">
-                                         I have plotted the belief and ground truth data points at the following locations. <br><br>
+                                         I have plotted the belief (blue dot) and ground truth (green dot) data points at the following locations two times. <br><br>
                                          <strong>[5,3]</strong><br>
-                                         <img src="Lab 11/53.jpg" alt="53.jpg" style="width:50%">
-                                         <img src="Lab 11/532.jpg" alt="53.png" style="width:50%"><br><br>
+                                         <img src="Lab 11/53.jpg" alt="53.jpg" style="width:45%">
+                                         <img src="Lab 11/532.jpg" alt="53.png" style="width:45%"><br>
+                                         In the first set of data, the initial belief of the robot's location matches the ground truth, 
+                                         which is why the green dot representing the robot's estimated position is located directly under 
+                                         the blue dot representing the true position. This indicates that the localization algorithm is performing 
+                                         accurately and providing reliable estimates of the robot's location. However, in the second set of data, 
+                                         the initial belief of the robot's location is one grid below the ground truth. <br><br>
                                           <strong>[5,-3]</strong><br>
-                                         <img src="Lab 11/5_32.jpg" alt="5_32.png" style="width:50%">
-                                         <img src="Lab 11/5_3.jpg" alt="5_3.png" style="width:50%"><br><br>
+                                         <img src="Lab 11/5_32.jpg" alt="5_32.png" style="width:45%">
+                                         <img src="Lab 11/5_3.jpg" alt="5_3.png" style="width:45%"><br>
+                                         In the first set of data, the initial belief of the robot's location was one grid to the left and diagonally
+                                         below the ground truth position. In the second set of data, the initial belief was one grid to the right and 
+                                         diagonally below the ground truth position.<br><br>
                                          <strong>[0,3]</strong><br>
-                                         <img src="Lab 11/03.jpg" alt="032.png" style="width:50%">
-                                         <img src="Lab 11/032.jpg" alt="03.png" style="width:50%"><br><br>
+                                         <img src="Lab 11/03.jpg" alt="032.png" style="width:45%">
+                                         <img src="Lab 11/032.jpg" alt="03.png" style="width:45%"><br>
+                                         In the first set of data, the initial belief of the robot's location matches the ground truth. In the second set
+                                         of data, the initial belief of the robot's location is one grid to the right and diagonally above the ground truth position.<br><br>
                                          <strong>[-3,-2]</strong><br>
-                                         <img src="Lab 11/322.jpg" alt="32.png" style="width:50%">
-                                         <img src="Lab 11/32.jpg" alt="322.png" style="width:50%"></p>
-                                    <h5 class="text-left text-secondary mb-0;">Conclusion: </h5>
+                                         <img src="Lab 11/322.jpg" alt="32.png" style="width:45%">
+                                         <img src="Lab 11/32.jpg" alt="322.png" style="width:45%"><br>
+                                         In the first set of data, the initial belief of the robot's location matches the ground truth. In the second set of 
+                                         data, the initial belief of the robot's location is one grid to the left and diagonally below the ground truth position.</p>
+                                    <h5 class="text-left text-secondary mb-0;">Discussion: </h5>
                                      <p class="text-left text-secondary mb-0;">
                                     </p>
                                     <hr>
