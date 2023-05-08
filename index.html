@@ -1564,7 +1564,7 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          I have plotted the belief (blue dot) and ground truth (green dot) data points at the following locations two times. <br><br>
                                          <strong>[5,3]</strong><br>
                                          <img src="Lab 11/53.jpg" alt="53.jpg" style="width:45%">
-                                         <img src="Lab 11/532.jpg" alt="53.png" style="width:45%"><br>
+                                         <img src="Lab 11/532.jpg" alt="53.png" style="width:45%"><br><br>
                                          In the first set of data, the initial belief of the robot's location matches the ground truth, 
                                          which is why the green dot representing the robot's estimated position is located directly under 
                                          the blue dot representing the true position. This indicates that the localization algorithm is performing 
@@ -1572,22 +1572,29 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                          the initial belief of the robot's location is one grid below the ground truth. <br><br>
                                           <strong>[5,-3]</strong><br>
                                          <img src="Lab 11/5_32.jpg" alt="5_32.png" style="width:45%">
-                                         <img src="Lab 11/5_3.jpg" alt="5_3.png" style="width:45%"><br>
+                                         <img src="Lab 11/5_3.jpg" alt="5_3.png" style="width:45%"><br><br>
                                          In the first set of data, the initial belief of the robot's location was one grid to the left and diagonally
                                          below the ground truth position. In the second set of data, the initial belief was one grid to the right and 
                                          diagonally below the ground truth position.<br><br>
                                          <strong>[0,3]</strong><br>
                                          <img src="Lab 11/03.jpg" alt="032.png" style="width:45%">
-                                         <img src="Lab 11/032.jpg" alt="03.png" style="width:45%"><br>
+                                         <img src="Lab 11/032.jpg" alt="03.png" style="width:45%"><br><br>
                                          In the first set of data, the initial belief of the robot's location matches the ground truth. In the second set
                                          of data, the initial belief of the robot's location is one grid to the right and diagonally above the ground truth position.<br><br>
                                          <strong>[-3,-2]</strong><br>
                                          <img src="Lab 11/322.jpg" alt="32.png" style="width:45%">
-                                         <img src="Lab 11/32.jpg" alt="322.png" style="width:45%"><br>
+                                         <img src="Lab 11/32.jpg" alt="322.png" style="width:45%"><br><br>
                                          In the first set of data, the initial belief of the robot's location matches the ground truth. In the second set of 
-                                         data, the initial belief of the robot's location is one grid to the left and diagonally below the ground truth position.</p>
+                                         data, the initial belief of the robot's location is two grids to the left and diagonally below the ground truth position.</p>
                                     <h5 class="text-left text-secondary mb-0;">Discussion: </h5>
                                      <p class="text-left text-secondary mb-0;">
+                                         Upon analyzing the above diagrams, it appears that the overall localization performs fairly well. Specifically, the robot's belief was 
+                                         accurate in three of the trials, and in four trials, it was only one grid away from the ground truth. In only one trial, the robot's belief
+                                         was two grids away from the ground truth. One possible explanation for the inaccurate belief could be the limited range of the ToF sensor. 
+                                         As we learned in Lab 9, the accuracy of the ToF sensor decreases and becomes noisy when it detects objects that are far away. Another reason 
+                                         could be that the localization algorithm is less accurate in locations where the surroundings are more symmetrical. In my observations, the
+                                         localization produced better results when the surroundings were not very symmetrical. Finally, it's also possible that in the second set of 
+                                         trials, the wheels caught dust, leading to more drift in the rotation and an inaccurate belief about the robot's location at a different grid location.
                                     </p>
                                     <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
