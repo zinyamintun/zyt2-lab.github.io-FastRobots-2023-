@@ -1515,9 +1515,69 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 11"/>
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                    The purpose of this lab is to perform localization with the provided Bayes Filter code on the actual 
+                                        robot to see its performance in real-world systems.</p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Localization Simulation: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        To ensure the effectiveness of the provided code, I ran it on the simulator to test its performance 
+                                        before deploying it on a physical robot. As we can see, the belief of the robot (blue) is fairly close 
+                                        to the ground truth of the robot (green). Thus, we can proceed to implement the code on a physical robot.<br><br>
+                                        <img src="Lab 11/loc_sim.png" alt="loc_sim.png" style="width:100%">
+                                    </p>
+                                     <h4 class="text-left text-secondary mb-0;">Localization Real: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        In this task, we are only executing the update step of the Bayes filter algorithm using Time-of-Flight (ToF) sensor
+                                        measurements to estimate the robot's position. This is because the robot's motion is noisy, and performing the prediction
+                                        step would likely decrease the accuracy of the algorithm.<br><br>
+                                        The prediction step involves estimating the robot's position based on its previous position and the control inputs,
+                                        which can be affected by noise and uncertainty. By excluding the prediction step and only using the ToF sensor measurements
+                                        in the update step, we can reduce the impact of the noisy motion and improve the performance rate of the algorithm.<br><br>
+                                        However, it's important to note that this approach may not be suitable for all localization scenarios and may result in a
+                                        less accurate estimation of the robot's position. In some cases, it may be necessary to perform both the prediction and 
+                                        update steps to achieve the desired level of accuracy in localization.</p>
+                                     <h5 class="text-left text-secondary mb-0;">Observation Loop: </h5>
+                                     <p class="text-left text-secondary mb-0;">
+                                         To implement the localization algorithm on the physical robot, we need to implement the <strong>perform_observation_loop()</strong> method
+                                         of the class <strong>RealRobot </strong>which is required by the provided localization code. This method should output a numpy column array 
+                                         consisting of 18 ToF sensor readings and the corresponding angle at every 20-degree interval in the counterclockwise direction 
+                                         of rotation. <br><br>
+                                         To integrate the code from lab 9 with the localization code, some modifications need to be made to record only the 
+                                         necessary 18 ToF sensor readings and send them back after one full rotation has been completed. To achieve this,
+                                         I used a PID controller to control the angular speed of the robot during the rotation. I set the PID gains to be
+                                         <strong> Kp =3.5, Ki=0.25, and Kd= 0.002 </strong>to ensure stable and constant rotation. While the robot is rotating, I checked 
+                                         the current angle to record the sensor measurements in arrays once the robot reaches the 20 degree increment of 
+                                         rotation.. When the full rotation has been completed, the two arrays containing sensor readings can be sent back 
+                                         to the computer as the output of the perform_observation_loop() method.
+                                    </p>
+                                    <h5 class="text-left text-secondary mb-0;">Arduino Code: </h5>
+                                     <p class="text-left text-secondary mb-0;">
+                                         <script src="https://gist.github.com/zinyamintun/72592c2e05725f6091204327fd38f224.js"></script></p>
+                                      <h5 class="text-left text-secondary mb-0;">Python Code: </h5>
+                                     <p class="text-left text-secondary mb-0;">
+                                        <script src="https://gist.github.com/zinyamintun/3a721ddf669edac0fff85cf471e3dd57.js"></script></p>
+                                    <h5 class="text-left text-secondary mb-0;">Result: </h5>
+                                     <p class="text-left text-secondary mb-0;">
+                                         I have plotted the belief and ground truth data points at the following locations. <br><br>
+                                         <strong>[5,3]</strong><br>
+                                         <img src="Lab 11/532.png" alt="532.png" style="width:100%">
+                                         <img src="Lab 11/53.png" alt="53.png" style="width:100%"><br><br>
+                                          <strong>[5,-3]</strong><br>
+                                         <img src="Lab 11/5_32.png" alt="5_32.png" style="width:100%">
+                                         <img src="Lab 11/5_3.png" alt="5_3.png" style="width:100%"><br><br>
+                                         <strong>[0,3]</strong><br>
+                                         <img src="Lab 11/032.png" alt="032.png" style="width:100%">
+                                         <img src="Lab 11/03.png" alt="03.png" style="width:100%"><br><br>
+                                         <strong>[-3,-2]</strong><br>
+                                         <img src="Lab 11/_3_2.png" alt="_3_2.png" style="width:100%">
+                                         <img src="Lab 11/_3_22.png" alt="_3_22.png" style="width:100%"></p>
+                                    <h5 class="text-left text-secondary mb-0;">Conclusion: </h5>
+                                     <p class="text-left text-secondary mb-0;">
+                                    </p>
+                                    <hr>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
