@@ -1654,7 +1654,8 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         would allow me to determine whether the robot had reached the next waypoint or not. If the robot successfully reached the current 
                                         goal waypoint, it would proceed to the next waypoint in the sequence. However, if the robot did not reach the current goal, 
                                         it would make attempts to reach the same waypoint again.<br><br>
-                                    
+                                    <script src="https://gist.github.com/zinyamintun/0281144e229856f78b7b81c4e1acf20c.js"></script>
+
                                     
                                     </p>
                                      <h6 class="text-left text-secondary mb-0;">Arduino Side:</h6>
@@ -1664,7 +1665,8 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         the Arduino would execute the necessary localization algorithms and send the resulting data back to the Python side.<br><br>
                                         <strong>  Move to Next Goal Position: </strong>If the task sent from the computer was to move to the next goal position, 
                                         the Arduino would initiate the required movements to navigate towards the desired waypoint.<br><br>
-                                    
+                                    <script src="https://gist.github.com/zinyamintun/8b13c62aa333eeab7eb58bd5fb17aa28.js"></script>
+
                                     
                                     </p>
                                      <h6 class="text-left text-secondary mb-0;">Challenges Faced and Potential Solution:</h6>
@@ -1672,14 +1674,25 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         In addition to the Bluetooth failure, another challenge I encountered was the limitation of the Time-of-Flight (ToF) sensor. Once the Python side calculated the required distance for the robot to travel, I attempted to use a simple proportional term in a PID control scheme to reach the desired distance. However, a major challenge arose when most of the waypoints had obstacles that fell outside the range of the ToF sensor. As a result, the robot unintentionally collided with walls, leading to unexpected outcomes.
 To address this issue, I consulted with other students who were also using PID control in the lab. They suggested continuously adjusting the robot's orientation at each waypoint, ensuring that it always faced a wall within the sensor's range. While this approach helped to avoid collisions, it could introduce further complexity if I were to incorporate localization.
 Another approach I considered involved calculating the time it took for the robot to travel a certain distance at a specific PWM value. Based on my observation from the first to the second waypoint, which took approximately 1300 seconds, I established a convention to estimate the distance at each subsequent point. However, before I could test this approach, my Artemis failed, preventing me from evaluating its effectiveness.<br><br>
+                                        <script src="https://gist.github.com/zinyamintun/befaab74b634ede61cfcf4258ca4f60d.js"></script>
+
                                     </p>
                                     <h4 class="text-left text-secondary mb-0;">Implementing the Open-Loop Control: </h4>
                                     <p class="text-left text-secondary mb-0;">
-                                        
-                                        
+                                       To implement the open-loop control, we utilized a switch statement with the expression being the variable "state." 
+                                        This allowed us to determine the appropriate action for each case. Within each case, the robot was instructed to
+                                        either move forward or turn using the angle_turn() function.<br><br>
+                                        More detailed explaination of this code can be found in <a href="https://tiffanyguo8.github.io/ECE4160/lab12.html#">Tiffany's </a>website. <br><br>
+                                        <script src="https://gist.github.com/zinyamintun/bff836cb4bf5fe2a023b8371064885b7.js"></script>
                                     </p>
-                                    <h4 class="text-left text-secondary mb-0;">Final Result: </h4>
+                                    <h4 class="text-left text-secondary mb-0;">Final Result (Tiffany's Robot): </h4>
                                     <p class="text-left text-secondary mb-0;">
+                                        <iframe width="345" height="560" src="https://www.youtube.com/embed/e9nq8MRkf-4??controls=1"> </iframe>
+                                    </p>
+                                    <h4 class="text-left text-secondary mb-0;">Final Result (Not My Robot :)) </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        <iframe width="560" height="345" src="https://www.youtube.com/embed/qMBQeR7fFQo?controls=1"> </iframe>
+                                        
                                     </p>
                                      <h6 class="text-left text-secondary mb-0;">Conclusion and Acknowledgements:</h6>
                                     <p class="text-left text-secondary mb-0;">
