@@ -1622,9 +1622,76 @@ According to the Arduino IDE, the maximum memory available for arrays is <strong
                                         <div class="divider-custom-icon"><i class="fa-solid fa-barcode"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/Lab 1 profile.png" alt="LAB 12"/>
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Lab Description:</h3></u>
+                                    <p class="text-left text-secondary mb-0;">
+                                   In this lab we are trying to tailor everything we have learned so far in lab 1-11. Our task for this lab is 
+                                        to navigate through a set of waypoints in the environment as quickly and as accurately as possible. </p>
+                                    <hr>
+                                     <u class= "text-secondary" ><h3 class="text-left text-secondary mb-0;">Tasks: </h3></u>
+                                    <h4 class="text-left text-secondary mb-0;">Introduction: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        While I found this lab to be enjoyable, it also proved to be quite frustrating due to the consistent 
+                                        failures of my Bluetooth connection. This issue caused disruptions throughout the entire process, leading 
+                                        me to have to re-solder the Artemis module twice and the battery three times. Not only did these setbacks consume
+                                        a significant amount of time, but they also had a direct impact on my ability to complete the debugging process 
+                                        for the localization implementation. Initially, I had planned to implement a localization method as I believed it 
+                                        would provide higher accuracy and robustness compared to open loop and PID control. However, the persistent issues with 
+                                        the Artemis Bluetooth connection and the multiple failures that occurred forced me to adapt my approach. I ended up 
+                                        collaborating with Tiffany Guo to implement an open loop control strategy instead. This report will outline my initial 
+                                        attempt at implementing the localization method, the challenges I faced, the potential solution, and the final implementation 
+                                        of the open loop control.</p>
+                                    <h4 class="text-left text-secondary mb-0;">Implementing the localization method:</h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        To implement the localization method, I planned to separate the tasks between the Python and Arduino sides. Here is an overview 
+                                        of the tasks for each side:
+                                    </p>
+                                     <h6 class="text-left text-secondary mb-0;">Python Side:</h6>
+                                    <p class="text-left text-secondary mb-0;">
+                                        <strong>Calculate Turn Angle and Distance:</strong> Using the provided waypoints, I intended to calculate the angle the robot needed to turn 
+                                        from its current position to face the next waypoint. Additionally, I planned to determine the distance the robot needed to 
+                                        travel from its current position to reach the next waypoint.<br><br>
+                                        <strong>Estimate Current Position: </strong>Utilizing the localization data, my goal was to estimate the robot's current position. This estimation 
+                                        would allow me to determine whether the robot had reached the next waypoint or not. If the robot successfully reached the current 
+                                        goal waypoint, it would proceed to the next waypoint in the sequence. However, if the robot did not reach the current goal, 
+                                        it would make attempts to reach the same waypoint again.<br><br>
+                                    
+                                    
+                                    </p>
+                                     <h6 class="text-left text-secondary mb-0;">Arduino Side:</h6>
+                                    <p class="text-left text-secondary mb-0;">
+                                        Depending on the task received from the Python side, the Arduino would perform different actions:
+                                        <strong> Perform Localization: </strong>If the task sent from the computer was to perform localization,
+                                        the Arduino would execute the necessary localization algorithms and send the resulting data back to the Python side.<br><br>
+                                        <strong>  Move to Next Goal Position: </strong>If the task sent from the computer was to move to the next goal position, 
+                                        the Arduino would initiate the required movements to navigate towards the desired waypoint.<br><br>
+                                    
+                                    
+                                    </p>
+                                     <h6 class="text-left text-secondary mb-0;">Challenges Faced and Potential Solution:</h6>
+                                    <p class="text-left text-secondary mb-0;">
+                                        In addition to the Bluetooth failure, another challenge I encountered was the limitation of the Time-of-Flight (ToF) sensor. Once the Python side calculated the required distance for the robot to travel, I attempted to use a simple proportional term in a PID control scheme to reach the desired distance. However, a major challenge arose when most of the waypoints had obstacles that fell outside the range of the ToF sensor. As a result, the robot unintentionally collided with walls, leading to unexpected outcomes.
+To address this issue, I consulted with other students who were also using PID control in the lab. They suggested continuously adjusting the robot's orientation at each waypoint, ensuring that it always faced a wall within the sensor's range. While this approach helped to avoid collisions, it could introduce further complexity if I were to incorporate localization.
+Another approach I considered involved calculating the time it took for the robot to travel a certain distance at a specific PWM value. Based on my observation from the first to the second waypoint, which took approximately 1300 seconds, I established a convention to estimate the distance at each subsequent point. However, before I could test this approach, my Artemis failed, preventing me from evaluating its effectiveness.<br><br>
+                                    </p>
+                                    <h4 class="text-left text-secondary mb-0;">Implementing the Open-Loop Control: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                        
+                                        
+                                    </p>
+                                    <h4 class="text-left text-secondary mb-0;">Final Result: </h4>
+                                    <p class="text-left text-secondary mb-0;">
+                                    </p>
+                                     <h6 class="text-left text-secondary mb-0;">Conclusion and Acknowledgements:</h6>
+                                    <p class="text-left text-secondary mb-0;">
+                                        Although I was unable to complete the debugging process for the localization method, I had a positive experience working on the
+                                        open loop control with Tiffany. I would like to express my gratitude to Tiffany for her collaboration and willingness to
+                                        let me join her in completing the last lab. Additionally, I would like to extend my appreciation to all the course staff 
+                                        members for their support throughout the entire process, with a special thank you to Anya for her assistance with soldering 
+                                        and patiently addressing my questions. 
+                                    </p>
+                                    <hr>
+
+                                    <!-- Portfolio Modal - Image-->
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
